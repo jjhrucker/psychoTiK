@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PsychoRx — Patient Experience Review</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#0d1117; color:#c9d1d9; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:13px; line-height:1.5; }
+  header { background:#161b22; border-bottom:1px solid #30363d; padding:14px 24px; position:sticky; top:0; z-index:100; display:flex; align-items:center; gap:20px; }
+  header h1 { font-size:15px; font-weight:700; color:#fff; }
+  header p { font-size:11px; color:#8b949e; }
+  .nav { background:#0d1117; border-bottom:1px solid #21262d; padding:8px 24px; display:flex; gap:6px; flex-wrap:wrap; position:sticky; top:49px; z-index:99; }
+  .nav-btn { background:#21262d; border:1px solid #30363d; color:#c9d1d9; padding:3px 12px; border-radius:20px; cursor:pointer; font-size:11px; }
+  .nav-btn:hover { background:#30363d; }
+  .main { max-width:1280px; margin:0 auto; padding:20px 24px; }
+  .toolbar { display:flex; gap:8px; margin-bottom:18px; align-items:center; flex-wrap:wrap; }
+  .toolbar button { background:#238636; border:none; color:#fff; padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; }
+  .toolbar button.sec { background:#21262d; border:1px solid #30363d; color:#c9d1d9; }
+  .toolbar button:hover { opacity:.85; }
+  .filter-group { display:flex; gap:5px; margin-left:auto; align-items:center; }
+  .filter-btn { background:#21262d; border:1px solid #30363d; color:#8b949e; padding:3px 10px; border-radius:12px; cursor:pointer; font-size:11px; }
+  .filter-btn.active { border-color:#58a6ff; color:#58a6ff; background:#1f2d3d; }
+  .drug-section { background:#161b22; border:1px solid #30363d; border-radius:8px; margin-bottom:22px; overflow:hidden; scroll-margin-top:100px; }
+  .drug-header { padding:12px 16px; background:#1c2128; display:flex; align-items:center; gap:12px; }
+  .drug-name { font-size:15px; font-weight:700; color:#fff; }
+  .drug-class { font-size:11px; padding:2px 8px; border-radius:10px; background:#1f2d3d; color:#58a6ff; border:1px solid #1f4068; }
+  .post-count { font-size:11px; color:#8b949e; margin-left:auto; }
+  .effects-table { width:100%; border-collapse:collapse; }
+  .effects-table th { background:#1c2128; padding:7px 8px; text-align:left; font-size:10px; color:#8b949e; border-bottom:1px solid #30363d; font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+  .effects-table td { padding:6px 8px; border-bottom:1px solid #21262d; vertical-align:top; }
+  .effect-row:hover { background:#1c2128; }
+  .effect-row.rejected { opacity:.3; text-decoration:line-through; }
+  .domain-header td { background:#1a1f3a; color:#8eb8ff; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; padding:5px 8px; }
+  .effect-text { color:#e6edf3; }
+  .effect-text:focus { outline:1px solid #58a6ff; border-radius:3px; padding:1px 3px; }
+  .quote-cell { max-width:260px; word-wrap:break-word; }
+  .accept-cb { cursor:pointer; }
+  .output-area { display:none; background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:16px; margin-top:16px; }
+  .output-area pre { font-size:11px; color:#3ecf8e; overflow-x:auto; white-space:pre-wrap; max-height:500px; overflow-y:auto; }
+  .note { background:#1c2128; border:1px solid #30363d; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:12px; color:#8b949e; line-height:1.6; }
+  .note strong { color:#c9d1d9; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>PsychoRx — Patient Experience Review</h1>
+    <p>Synthetic proof-of-concept &middot; Generated 2026-06-11 08:56 &middot; Based on typical patient report corpora (drugs.com, Reddit, PatientsLikeMe)</p>
+  </div>
+</header>
+<div class="nav"><button class="nav-btn" onclick="scrollToDrug('sertraline')">Sertraline</button><button class="nav-btn" onclick="scrollToDrug('venlafaxine')">Venlafaxine</button><button class="nav-btn" onclick="scrollToDrug('amitriptyline')">Amitriptyline</button><button class="nav-btn" onclick="scrollToDrug('phenelzine')">Phenelzine</button><button class="nav-btn" onclick="scrollToDrug('mirtazapine')">Mirtazapine</button><button class="nav-btn" onclick="scrollToDrug('haloperidol')">Haloperidol</button><button class="nav-btn" onclick="scrollToDrug('quetiapine')">Quetiapine</button><button class="nav-btn" onclick="scrollToDrug('lithium')">Lithium</button><button class="nav-btn" onclick="scrollToDrug('methylphenidate')">Methylphenidate</button><button class="nav-btn" onclick="scrollToDrug('diazepam')">Diazepam</button></div>
+<div class="main">
+  <div class="note">
+    <strong>How to use:</strong> Review extracted effects below. Edit text inline if needed. Uncheck effects to reject them.
+    Use the filter buttons to focus on benefits or side effects. When done, click <strong>Export accepted</strong> to get
+    the JSON for incorporation into the tool as a separate <em>Patient Reports</em> layer.
+    <br><br>
+    <strong>Note:</strong> This is a synthetic proof-of-concept generated from knowledge of typical patient report corpora — not a live scrape.
+    Post counts are indicative of relative frequency, not absolute figures.
+  </div>
+  <div class="toolbar">
+    <button onclick="exportAccepted()">Export accepted (JSON)</button>
+    <button class="sec" onclick="toggleAll(true)">Accept all</button>
+    <button class="sec" onclick="toggleAll(false)">Reject all</button>
+    <div class="filter-group">
+      <span style="font-size:11px;color:#8b949e">Filter:</span>
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('benefit',this)" style="color:#3ecf8e">Benefits</button>
+      <button class="filter-btn" onclick="setFilter('side_effect',this)" style="color:#e05c5c">Side effects</button>
+      <button class="filter-btn" onclick="setFilter('variable',this)" style="color:#f5c542">Variable</button>
+    </div>
+  </div>
+  
+        <div class="drug-section" id="ds-sertraline">
+          <div class="drug-header">
+            <span class="drug-name">Sertraline</span>
+            <span class="drug-class">SSRI</span>
+            <span class="post-count">80 posts analysed &middot; 14 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Nausea and GI upset especially in first 1–2 weeks</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">63</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the nausea was rough at first but it passed after about 10 days"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced libido and delayed orgasm</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">47</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the sexual side effects are real and nobody warned me"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Sweating especially at night</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"night sweats were embarrassing, had to change sheets"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Initial increase in anxiety in first 1–2 weeks</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">29</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the first week was actually worse, more anxious and jittery"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Weight gain with long-term use</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">24</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"gained about 8 pounds over a year without changing my diet"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Yawning excessively</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">22</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the constant yawning was embarrassing at work"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced rumination and intrusive thoughts</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">33</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"i stopped catastrophising everything, the thought loops slowed down"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Gradual lifting of depressive symptoms</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">58</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"after about 6 weeks i started to feel like myself again"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced anxiety and worry within 2–4 weeks</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">54</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"felt like the constant background noise of anxiety just got quieter"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Emotional blunting — reduced range of feeling</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">41</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"i don't feel sad but i don't really feel happy either, just kind of flat"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Discontinuation — electric shock sensations (brain zaps) if stopped abruptly</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">35</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the brain zaps when i forgot a dose were unlike anything i'd felt before"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">motivation</td>
+            </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="motivation" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Improved ability to engage with daily tasks</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">27</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"i started being able to do things i'd been putting off for months"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="sleep" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Vivid or unusual dreams</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my dreams became really intense and strange, almost cinematic"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="sertraline" data-domain="sleep" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Improved sleep quality once stabilised</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">19</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"sleep got much better after the first few weeks settled down"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-venlafaxine">
+          <div class="drug-header">
+            <span class="drug-name">Venlafaxine</span>
+            <span class="drug-class">SNRI</span>
+            <span class="post-count">75 posts analysed &middot; 13 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">arousal</td>
+            </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="arousal" data-valence="variable">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Sexual dysfunction less prominent than SSRIs for some</td>
+                  <td><span style="color:#f5c542;font-weight:600">variable</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">16</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"surprised that the sexual side effects were less bad than on sertraline for me"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Brain zaps and electric shock sensations on missing doses or stopping</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">71</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"missing even one dose causes these horrible electric zaps through my head"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Discontinuation syndrome — one of the worst of any antidepressant</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">66</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"coming off was absolutely brutal, like the worst flu mixed with electric shocks"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Nausea especially on initiation</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">55</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"nausea was really bad first week, had to take it with food"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Sweating profusely, especially at night</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">52</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the sweating is embarrassing — soaking through shirts at work"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Increased blood pressure requiring monitoring</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">29</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my GP had to start monitoring my BP, it crept up on the higher dose"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dry mouth</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">27</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"constant dry mouth, drinking water all day"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="body" data-valence="variable">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced appetite and some weight loss at higher doses</td>
+                  <td><span style="color:#f5c542;font-weight:600">variable</span></td>
+                  <td>subacute</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">21</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"lost weight on 225mg which i didn't want"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Improved concentration and mental clarity</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my brain fog lifted and I could actually think straight again"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Good antidepressant effect, often after SSRI failure</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">48</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"worked when three SSRIs hadn't, felt like it actually did something"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Emotional blunting similar to SSRIs</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">34</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"helps with the lows but also mutes the highs"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">motivation</td>
+            </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="motivation" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Energy and drive improved notably compared to SSRIs</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">24</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"felt more energised than on fluoxetine, more get up and go"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="venlafaxine" data-domain="sleep" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Insomnia and disturbed sleep</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"couldn't sleep properly for weeks after starting"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-amitriptyline">
+          <div class="drug-header">
+            <span class="drug-name">Amitriptyline</span>
+            <span class="drug-class">TCA</span>
+            <span class="post-count">65 posts analysed &middot; 12 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dry mouth constantly</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">57</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"mouth like sandpaper all the time, had to carry water everywhere"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Significant weight gain</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">54</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"put on two stone over 18 months, couldn't control it"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Effective for chronic pain and neuropathy at low doses</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">43</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"10–25mg basically solved my nerve pain when nothing else had"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Constipation</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the constipation was really troublesome"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Effective for migraine prevention</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">36</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"cut my migraines from 3 a month to maybe one every 6 weeks"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Postural hypotension — dizziness on standing</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">25</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"kept going dizzy when i stood up, nearly fainted twice"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Urinary hesitancy</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">22</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"had trouble starting urination, had to tell my GP"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Heart palpitations at higher doses</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">19</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"noticed my heart racing when the dose went above 50mg"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Morning grogginess and cognitive slowing</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">49</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the hangover effect next morning is real, foggy until noon"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Memory and word-finding difficulties</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"couldn't find words mid-sentence, felt dimmer than usual"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Mood improvement, especially at higher antidepressant doses</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">28</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"at 75mg it genuinely lifted my depression where SSRIs hadn't"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="amitriptyline" data-domain="sleep" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Powerful sedation — very effective for sleep at low doses</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">61</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"10mg and i'm out within 30 minutes, best sleep i've had in years"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-phenelzine">
+          <div class="drug-header">
+            <span class="drug-name">Phenelzine</span>
+            <span class="drug-class">MAOI</span>
+            <span class="post-count">45 posts analysed &middot; 11 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dietary restrictions — tyramine crisis risk is real and frightening</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">41</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the diet restrictions are strict and scary — one mistake can be dangerous"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Orthostatic hypotension — dizziness and fainting</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">37</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"kept passing out when standing up, had to sit down slowly"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Weight gain, often substantial</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"gained significant weight, seemed to increase appetite a lot"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Oedema — ankle and leg swelling</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">24</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my ankles swelled up noticeably after a few months"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Sexual dysfunction — particularly anorgasmia</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">19</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"complete inability to orgasm, very frustrating"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Mental clarity and sharpness improved in responders</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">22</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"felt mentally sharper than i had in years"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Profound antidepressant effect after other treatments failed</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">39</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"nothing else had worked in 15 years — phenelzine changed my life"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dramatic reduction in social anxiety</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">34</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"social anxiety basically disappeared, i could talk to people without terror"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Emotional lability in some — tearfulness</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">16</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"found myself crying more easily, not always in a bad way"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Hypomanic activation in some patients</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">14</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"became unusually energised and talkative — had to reduce the dose"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="phenelzine" data-domain="sleep" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Insomnia — particularly difficulty getting to sleep</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">28</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"paradoxically wired at night even though tired"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-mirtazapine">
+          <div class="drug-header">
+            <span class="drug-name">Mirtazapine</span>
+            <span class="drug-class">NaSSA</span>
+            <span class="post-count">70 posts analysed &middot; 12 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Significant weight gain and increased appetite (carb craving)</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">72</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the hunger is insane, craving carbs constantly, gained 15kg"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dry mouth</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">33</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"dry mouth pretty much constant"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="body" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Fewer sexual side effects than SSRIs</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">19</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"libido actually improved compared to sertraline"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Restless legs sensation</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">18</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"developed restless legs at night which were very distressing"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Morning sedation and cognitive fog</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">51</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"feel drugged and stupid until midday, can't function in mornings"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Vivid, often disturbing dreams</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">24</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the dreams are incredibly vivid and often dark"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Good antidepressant effect, particularly for anxious depression</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">44</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"worked well for the anxiety side of my depression"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Paradoxically more anxious at low doses (antihistamine effect dominates)</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">29</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"felt more anxious on 7.5mg, better when dose went up to 30mg"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Less emotional blunting than SSRIs in many patients</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">21</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"still feel things emotionally unlike on fluoxetine"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">motivation</td>
+            </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="motivation" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced motivation and increased apathy</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">26</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"motivation just evaporated, could lie in bed all day quite happily"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="sleep" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Powerful sedation — very helpful for insomnia</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">67</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"knocked me out within an hour, slept 10 hours solid"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="mirtazapine" data-domain="sleep" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Improved sleep architecture — more restorative sleep</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"sleep quality is genuinely better, feel more rested"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-haloperidol">
+          <div class="drug-header">
+            <span class="drug-name">Haloperidol</span>
+            <span class="drug-class">Typical antipsychotic</span>
+            <span class="post-count">40 posts analysed &middot; 10 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Akathisia — unbearable inner restlessness</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the restlessness was absolute torture, couldn't sit still for a second"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Muscle stiffness and rigidity (Parkinsonism)</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">36</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my movements became stiff and robotic, hard to walk normally"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Acute dystonia — muscle spasms especially of neck and jaw</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">28</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"terrifying muscle spasm locked my neck sideways, needed injection to fix it"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Tardive dyskinesia with long-term use</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">21</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"developed facial movements i couldn't control after 2 years"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="body" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Weight gain less than atypicals</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">16</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"didn't gain weight the way i did on olanzapine"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Severe cognitive blunting and slowing</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">42</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"felt like my brain was running through treacle, couldn't think"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced paranoia and delusional thinking</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">29</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the paranoia that had taken over my life faded significantly"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Profound emotional flatness — worse than the illness for some</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">33</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"i felt like a zombie, no joy, no sadness, just nothing"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">perception</td>
+            </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="perception" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Effective at reducing psychotic symptoms and hallucinations</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">35</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the voices went quiet within a few days"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="haloperidol" data-domain="sleep" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Sedation — useful in acute agitation</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">24</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"knocked out the agitation and let me sleep for the first time in days"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-quetiapine">
+          <div class="drug-header">
+            <span class="drug-name">Quetiapine</span>
+            <span class="drug-class">Atypical antipsychotic</span>
+            <span class="post-count">85 posts analysed &middot; 13 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Significant weight gain, especially with long-term use</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">78</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"gained 20kg over two years, couldn't control appetite"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Increased appetite, especially for sweet foods</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">59</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"constant hunger for sugar and carbs, like a switch got flipped"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dry mouth</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">39</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"dry mouth all the time, gets worse at night"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Orthostatic hypotension — dizziness on standing</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"kept getting dizzy standing up, nearly fainted a few times"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Metabolic effects — raised blood sugar and cholesterol</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">28</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"triglycerides went through the roof, had to start a statin"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Morning cognitive fog and hangover effect</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">61</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"feel completely stupid and groggy until midday, can't function"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Cognitive blunting and reduced sharpness</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">47</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"feel less sharp than i used to be, slower processing"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Effective mood stabilisation in bipolar disorder</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">52</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"stopped the cycling between highs and lows better than lithium for me"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Useful for acute anxiety and agitation at low doses</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">44</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"25mg takes the edge off acute anxiety quickly"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Emotional blunting</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">34</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"flattened emotionally, not as bad as haloperidol but noticeable"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">perception</td>
+            </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="perception" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Effective for psychosis and paranoia at higher doses</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the paranoia and hearing things stopped within a week"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="sleep" data-valence="variable">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Extremely sedating — widely used off-label for insomnia</td>
+                  <td><span style="color:#f5c542;font-weight:600">variable</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">74</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"25–50mg and i'm asleep within 20 minutes, but the hangover is rough"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="quetiapine" data-domain="sleep" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced nightmare frequency in PTSD (off-label)</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">19</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"nightmares basically stopped on quetiapine, first decent sleep in years"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-lithium">
+          <div class="drug-header">
+            <span class="drug-name">Lithium</span>
+            <span class="drug-class">Mood stabiliser</span>
+            <span class="post-count">68 posts analysed &middot; 13 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Fine tremor of hands</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">61</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the hand tremor is embarrassing, people notice when i'm writing"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Excessive thirst and urination (nephrogenic diabetes insipidus)</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">54</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"drinking 4 litres of water a day, up every night to urinate"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Weight gain</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">45</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"steady weight gain that's hard to shift"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Toxicity fears — blood tests are anxiety-provoking</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">37</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the constant blood tests and worry about toxicity is stressful"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Nausea and GI upset, especially without food</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">34</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"nausea until i learned to always take it with a meal"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Hair thinning with long-term use</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">28</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my hair got noticeably thinner after 2 years"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Acne and skin changes</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">19</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"developed acne as an adult which was very distressing"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Cognitive dulling and memory difficulties</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">49</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"feel like my brain isn't as sharp, words harder to find"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced creativity and spontaneity — felt by artists and writers</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">26</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"lost some of the creative spark that was part of who i am"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Effective prevention of manic episodes</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">58</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"haven't had a full manic episode in 4 years on lithium"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Antisuicidal effect — distinctive and appreciated by patients</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">42</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"my suicidal thoughts just stopped, it's the one thing that actually helped that"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="mood" data-valence="variable">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">More effective for mania prevention than depression prevention</td>
+                  <td><span style="color:#f5c542;font-weight:600">variable</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"great for stopping the highs but the lows still come through"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="lithium" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Subtle antidepressant effect over time</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">22</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"not a strong antidepressant but takes a definite edge off the lows"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-methylphenidate">
+          <div class="drug-header">
+            <span class="drug-name">Methylphenidate</span>
+            <span class="drug-class">Stimulant</span>
+            <span class="post-count">78 posts analysed &middot; 13 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduced appetite — often significant</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">67</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"completely kills my appetite, have to remind myself to eat"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Increased heart rate and blood pressure</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">43</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"heart racing, noticed it especially in first hour after taking it"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Headaches especially in early treatment</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">39</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"daily headaches for the first couple of weeks"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dry mouth</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">29</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"dry mouth throughout the day"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Growth effects with long-term paediatric use — parents report concern</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">15</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"GP monitoring height carefully, slight growth concern mentioned"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dramatically improved focus and concentration</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">71</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"like someone turned the volume down on the chaos in my head"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Improved working memory</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"could hold a conversation without losing the thread"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Rebound irritability and mood crash as it wears off</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">52</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the comedown in the evening is rough — irritable and exhausted"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Improved emotional regulation</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>subacute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">38</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"less explosive reactions, could pause before responding"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Anxiety — can worsen existing anxiety</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">34</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"made my anxiety worse, felt more on edge and wound up"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">motivation</td>
+            </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="motivation" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Increased ability to initiate and complete tasks</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">64</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"actually finished things for the first time in my life"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">perception</td>
+            </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="perception" data-valence="variable">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Heightened sensory awareness — colours brighter</td>
+                  <td><span style="color:#f5c542;font-weight:600">variable</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">18</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"everything seemed a bit more vivid and intense, not always pleasant"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="methylphenidate" data-domain="sleep" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Insomnia if taken too late in the day</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">58</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"can't take it after 2pm or i'm awake until 3am"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+        <div class="drug-section" id="ds-diazepam">
+          <div class="drug-header">
+            <span class="drug-name">Diazepam</span>
+            <span class="drug-class">Benzodiazepine</span>
+            <span class="post-count">62 posts analysed &middot; 12 effects extracted</span>
+          </div>
+          <table class="effects-table">
+            <thead><tr>
+              <th style="width:30px">&#10003;</th>
+              <th>Effect</th>
+              <th style="width:110px">Valence</th>
+              <th style="width:90px">Onset</th>
+              <th style="width:90px">Dose tier</th>
+              <th style="width:55px">Posts</th>
+              <th>Example quote</th>
+            </tr></thead>
+            <tbody>
+            <tr class="domain-header">
+              <td colspan="7">body</td>
+            </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Withdrawal — one of the most difficult drug withdrawals</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">64</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"withdrawal was horrific, seizure risk is real, shouldn't be done alone"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Rebound anxiety worse than original after stopping</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">55</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"the anxiety coming off it was so much worse than before i started"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="body" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Physical muscle relaxation</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">54</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"physical tension in my body just melted away"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="body" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Respiratory depression risk with alcohol or opioids</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>high</td>
+                  <td style="text-align:center;font-weight:600">24</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"was warned very seriously not to drink on it, the interaction is dangerous"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">cognition</td>
+            </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Cognitive blunting and sedation</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">51</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"couldn't think clearly, felt mentally slow and fuzzy"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="cognition" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Anterograde memory impairment — amnesia for events while under effect</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">47</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"couldn't remember conversations i'd had, quite alarming"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="cognition" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Reduces performance anxiety effectively for one-off use</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>low</td>
+                  <td style="text-align:center;font-weight:600">31</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"one tablet before a presentation completely eliminated the anxiety without sedating me"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">mood</td>
+            </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Dependence develops quickly — tolerance within weeks</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">71</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"within 3 weeks i needed it just to feel normal, not to feel good"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="mood" data-valence="benefit">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Rapid and powerful anxiolytic effect</td>
+                  <td><span style="color:#3ecf8e;font-weight:600">benefit</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">68</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"anxiety gone within 20 minutes, like a switch being turned off"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Emotional numbing — reduced ability to process feelings</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>chronic</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">28</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"stopped feeling much of anything, good or bad, after a few weeks"</em></td>
+                </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="mood" data-valence="side_effect">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Paradoxical disinhibition — aggression or emotional release in some</td>
+                  <td><span style="color:#e05c5c;font-weight:600">side effect</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">22</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"became uncharacteristically aggressive and tearful, very out of character"</em></td>
+                </tr>
+            <tr class="domain-header">
+              <td colspan="7">sleep</td>
+            </tr>
+                <tr class="effect-row" data-drug="diazepam" data-domain="sleep" data-valence="variable">
+                  <td><input type="checkbox" class="accept-cb" checked></td>
+                  <td class="effect-text" contenteditable="true">Helps with sleep onset but reduces sleep quality long-term</td>
+                  <td><span style="color:#f5c542;font-weight:600">variable</span></td>
+                  <td>acute</td>
+                  <td>medium</td>
+                  <td style="text-align:center;font-weight:600">43</td>
+                  <td class="quote-cell"><em style="color:#8b949e;font-size:11px">"good for getting to sleep but i wake up feeling worse over time"</em></td>
+                </tr></tbody>
+          </table>
+        </div>
+  <div class="output-area" id="outputArea">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span style="font-size:12px;font-weight:600;color:#58a6ff">Accepted effects — JSON</span>
+      <button onclick="copyOutput()" style="font-size:11px;padding:3px 10px;background:#21262d;border:1px solid #30363d;color:#c9d1d9;border-radius:4px;cursor:pointer">Copy</button>
+    </div>
+    <pre id="outputPre"></pre>
+  </div>
+</div>
+<script>
+function scrollToDrug(id) {
+  document.getElementById('ds-'+id)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('.accept-cb').forEach(cb => {
+  cb.addEventListener('change', function() {
+    this.closest('tr').classList.toggle('rejected', !this.checked);
+  });
+});
+function toggleAll(state) {
+  document.querySelectorAll('.accept-cb').forEach(cb => {
+    cb.checked = state;
+    cb.closest('tr').classList.toggle('rejected', !state);
+  });
+}
+function setFilter(valence, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.effect-row').forEach(row => {
+    row.style.display = (valence === 'all' || row.dataset.valence === valence) ? '' : 'none';
+  });
+  // Hide domain headers with no visible rows
+  document.querySelectorAll('.domain-header').forEach(h => {
+    let next = h.nextElementSibling;
+    let hasVisible = false;
+    while (next && !next.classList.contains('domain-header')) {
+      if (next.style.display !== 'none') hasVisible = true;
+      next = next.nextElementSibling;
+    }
+    h.style.display = hasVisible ? '' : 'none';
+  });
+}
+function exportAccepted() {
+  const out = {};
+  document.querySelectorAll('.effect-row').forEach(row => {
+    if (!row.querySelector('.accept-cb').checked) return;
+    const drug = row.dataset.drug;
+    const domain = row.dataset.domain;
+    const valence = row.dataset.valence;
+    const text = row.querySelector('.effect-text').innerText.trim();
+    const onset = row.cells[3].innerText.trim();
+    const dose  = row.cells[4].innerText.trim();
+    const count = parseInt(row.cells[5].innerText) || 1;
+    const quote = row.querySelector('.quote-cell em')?.innerText?.replace(/^"|"$/g,'').trim() || '';
+    if (!out[drug]) out[drug] = [];
+    out[drug].push([domain, text, valence, onset, dose, count, quote]);
+  });
+  document.getElementById('outputPre').textContent = JSON.stringify(out, null, 2);
+  const area = document.getElementById('outputArea');
+  area.style.display = 'block';
+  area.scrollIntoView({behavior:'smooth'});
+}
+function copyOutput() {
+  navigator.clipboard.writeText(document.getElementById('outputPre').textContent)
+    .then(() => alert('Copied to clipboard'));
+}
+</script>
+</body>
+</html>

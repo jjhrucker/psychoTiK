@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+records.jsonl
+receptor_experience_results.json
+/tmp/

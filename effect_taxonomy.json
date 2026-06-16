@@ -1,0 +1,476 @@
+{
+  "mood": {
+    "label": "Mood",
+    "description": "Valence of emotional state \u2014 positive or negative mood changes",
+    "domains": [
+      "mood",
+      "affect",
+      "emotion",
+      "valence",
+      "depression",
+      "mania",
+      "euphoria",
+      "dysphoria"
+    ],
+    "canonical_effects": [
+      "Low mood lifted",
+      "Antidepressant effect",
+      "Mild mood lift",
+      "Early mood improvement",
+      "Mood stabilisation",
+      "Full antidepressant effect",
+      "Full TCA antidepressant effect",
+      "Euphoria",
+      "Dysphoria",
+      "Mood elevation",
+      "Mood lowering",
+      "Depressed mood",
+      "Anhedonia reduced",
+      "Emotional numbing",
+      "Emotional blunting",
+      "Mood lability",
+      "Irritability reduced",
+      "Elation",
+      "Contentment",
+      "Wellbeing enhanced"
+    ],
+    "reddit_indicators": [
+      "felt good",
+      "felt great",
+      "mood boost",
+      "lifted",
+      "happy",
+      "sad",
+      "low",
+      "blue",
+      "depressed",
+      "down"
+    ]
+  },
+  "anxiety": {
+    "label": "Anxiety & Arousal",
+    "description": "Anxiolytic, anxiogenic, and arousal-level effects",
+    "domains": [
+      "anxiety",
+      "panic",
+      "fear",
+      "tension",
+      "arousal",
+      "stress"
+    ],
+    "canonical_effects": [
+      "Anxiety reduced",
+      "Mild anxiolysis",
+      "Anxiolytic effect",
+      "Generalised anxiety reduced",
+      "Panic attacks reduced",
+      "Muscle tension released",
+      "Anxiogenic",
+      "Anxiety worsened",
+      "Inner tension reduced",
+      "Hyperarousal reduced",
+      "Rumination reduced"
+    ],
+    "reddit_indicators": [
+      "anxious",
+      "panic",
+      "panicky",
+      "stressed",
+      "nervous",
+      "on edge",
+      "calm",
+      "calmer",
+      "relaxed"
+    ]
+  },
+  "sedation_sleep": {
+    "label": "Sedation & Sleep",
+    "description": "Sleep quality, onset, maintenance; daytime sedation",
+    "domains": [
+      "sleep",
+      "sedation",
+      "insomnia",
+      "hypnotic",
+      "drowsy",
+      "fatigue"
+    ],
+    "canonical_effects": [
+      "Sedation",
+      "Mild sedation",
+      "Profound sedation",
+      "Sedation / daytime drowsiness",
+      "Sleep onset improved",
+      "Sleep onset and maintenance improved",
+      "Insomnia",
+      "Insomnia improved",
+      "Hypnotic effect",
+      "Daytime drowsiness",
+      "Fatigue",
+      "Tiredness",
+      "Drowsiness",
+      "Sleep architecture improved",
+      "Dream intensity increased",
+      "Nightmares",
+      "REM suppression"
+    ],
+    "reddit_indicators": [
+      "sleepy",
+      "tired",
+      "knocked out",
+      "zonked",
+      "drowsy",
+      "slept",
+      "knocked me out",
+      "sleeping",
+      "sedated",
+      "groggy"
+    ]
+  },
+  "cognition": {
+    "label": "Cognition",
+    "description": "Attention, memory, processing speed, executive function",
+    "domains": [
+      "cognition",
+      "attention",
+      "memory",
+      "focus",
+      "concentration",
+      "executive",
+      "processing"
+    ],
+    "canonical_effects": [
+      "Concentration improved",
+      "Cognitive slowing",
+      "Cognitive enhancement",
+      "Attention improved",
+      "Memory impairment",
+      "Executive function improved",
+      "Brain fog",
+      "Mental clarity",
+      "Psychomotor slowing",
+      "Processing speed reduced",
+      "Working memory improved",
+      "Confusion"
+    ],
+    "reddit_indicators": [
+      "brain fog",
+      "foggy",
+      "can't think",
+      "clear headed",
+      "focused",
+      "sharp",
+      "slow",
+      "dumb",
+      "forgetful"
+    ]
+  },
+  "psychosis": {
+    "label": "Psychosis",
+    "description": "Positive symptoms of psychosis \u2014 hallucinations, delusions, disorganisation",
+    "domains": [
+      "psychosis",
+      "hallucination",
+      "delusion",
+      "paranoia",
+      "thought disorder"
+    ],
+    "canonical_effects": [
+      "Full antipsychotic effect",
+      "Antipsychotic effect",
+      "Early antipsychotic onset",
+      "Full FGA antipsychotic effect",
+      "Psychosis controlled",
+      "Hallucinations reduced",
+      "Delusions reduced",
+      "Hallucinations",
+      "Paranoia reduced",
+      "Thought disorder improved",
+      "Positive symptoms reduced"
+    ],
+    "reddit_indicators": [
+      "hearing voices",
+      "seeing things",
+      "paranoid",
+      "delusional",
+      "dissociating"
+    ]
+  },
+  "energy_motivation": {
+    "label": "Energy & Motivation",
+    "description": "Drive, initiative, fatigue, anhedonia, libido/motivation",
+    "domains": [
+      "energy",
+      "motivation",
+      "drive",
+      "anhedonia",
+      "fatigue",
+      "activation",
+      "libido"
+    ],
+    "canonical_effects": [
+      "Activating \u2014 reduced fatigue",
+      "Energy increased",
+      "Motivation improved",
+      "Appetite suppressed",
+      "Anhedonia reduced",
+      "Fatigue reduced",
+      "Drive increased",
+      "Lethargy",
+      "Anergia",
+      "Reward motivation enhanced",
+      "Stimulation"
+    ],
+    "reddit_indicators": [
+      "energy",
+      "energized",
+      "motivated",
+      "lazy",
+      "no motivation",
+      "can't get out of bed",
+      "drive"
+    ]
+  },
+  "perception": {
+    "label": "Perception & Consciousness",
+    "description": "Sensory changes, altered states, dissociation, ego dissolution",
+    "domains": [
+      "perception",
+      "hallucination",
+      "vision",
+      "dissociation",
+      "consciousness",
+      "ego",
+      "psychedelic"
+    ],
+    "canonical_effects": [
+      "Visual hallucinations",
+      "Auditory hallucinations",
+      "Perceptual distortions",
+      "Synaesthesia",
+      "Ego dissolution",
+      "Mystical experience",
+      "Dissociation",
+      "Depersonalisation",
+      "Derealisation",
+      "Altered time perception",
+      "Colour enhancement",
+      "Pattern recognition altered"
+    ],
+    "reddit_indicators": [
+      "visuals",
+      "tracers",
+      "colors brighter",
+      "patterns",
+      "tripping",
+      "high",
+      "dissociation"
+    ]
+  },
+  "social_empathy": {
+    "label": "Social & Empathy",
+    "description": "Prosocial feelings, empathy, connectedness, social anxiety",
+    "domains": [
+      "social",
+      "empathy",
+      "connection",
+      "prosocial",
+      "entactogen"
+    ],
+    "canonical_effects": [
+      "Empathy increased",
+      "Prosocial effects",
+      "Social connection enhanced",
+      "Social anxiety reduced",
+      "Openness increased",
+      "Sociability increased",
+      "Love and connection",
+      "Closeness to others",
+      "Social withdrawal"
+    ],
+    "reddit_indicators": [
+      "loved everyone",
+      "empathy",
+      "connected",
+      "open",
+      "social",
+      "talkative",
+      "loving"
+    ]
+  },
+  "autonomic": {
+    "label": "Autonomic & Cardiovascular",
+    "description": "Heart rate, blood pressure, sweating, temperature, GI",
+    "domains": [
+      "autonomic",
+      "cardiovascular",
+      "heart",
+      "blood pressure",
+      "sweating",
+      "temperature"
+    ],
+    "canonical_effects": [
+      "Heart rate elevated",
+      "Orthostatic hypotension",
+      "Orthostatic dizziness on standing",
+      "QTc prolongation",
+      "Sweating increased",
+      "Nausea",
+      "Constipation",
+      "Nausea, constipation",
+      "Constipation, nausea",
+      "Dry mouth",
+      "Hypotension",
+      "Tachycardia",
+      "Palpitations",
+      "Temperature dysregulation",
+      "Diaphoresis",
+      "Diarrhoea",
+      "GI upset"
+    ],
+    "reddit_indicators": [
+      "sweating",
+      "heart racing",
+      "dry mouth",
+      "nausea",
+      "sick",
+      "stomach",
+      "dizzy",
+      "light headed",
+      "shaking"
+    ]
+  },
+  "motor": {
+    "label": "Motor & Extrapyramidal",
+    "description": "Movement, tremor, rigidity, akathisia, tardive dyskinesia",
+    "domains": [
+      "motor",
+      "extrapyramidal",
+      "movement",
+      "tremor",
+      "akathisia",
+      "eps"
+    ],
+    "canonical_effects": [
+      "Akathisia (inner restlessness)",
+      "Tardive dyskinesia risk",
+      "Tremor",
+      "Extrapyramidal effects",
+      "Muscle rigidity",
+      "Bradykinesia",
+      "Dystonia",
+      "Parkinsonism",
+      "Motor slowing",
+      "Coordination impaired",
+      "EPS risk"
+    ],
+    "reddit_indicators": [
+      "restless legs",
+      "akathisia",
+      "can't sit still",
+      "twitching",
+      "tremor",
+      "stiff"
+    ]
+  },
+  "metabolic": {
+    "label": "Metabolic & Endocrine",
+    "description": "Weight, appetite, metabolic syndrome, prolactin, hormones",
+    "domains": [
+      "metabolic",
+      "weight",
+      "appetite",
+      "prolactin",
+      "glucose",
+      "lipids",
+      "hormone"
+    ],
+    "canonical_effects": [
+      "Weight gain",
+      "Significant weight gain",
+      "Appetite increased",
+      "Appetite suppressed",
+      "Prolactin elevation",
+      "Metabolic syndrome risk",
+      "Glucose dysregulation",
+      "Lipid changes",
+      "Thyroid effects",
+      "Weight neutral"
+    ],
+    "reddit_indicators": [
+      "weight",
+      "eating more",
+      "eating less",
+      "hungry",
+      "appetite",
+      "gained weight",
+      "lost weight"
+    ]
+  },
+  "sexual": {
+    "label": "Sexual Function",
+    "description": "Libido, arousal, orgasm, ejaculation",
+    "domains": [
+      "sexual",
+      "libido",
+      "orgasm",
+      "ejaculation",
+      "arousal"
+    ],
+    "canonical_effects": [
+      "Sexual dysfunction",
+      "Libido reduced",
+      "Libido increased",
+      "Anorgasmia",
+      "Delayed ejaculation",
+      "Erectile dysfunction",
+      "Sexual side effects",
+      "Hypersexuality",
+      "Sexual disinhibition"
+    ],
+    "reddit_indicators": [
+      "sex drive",
+      "no libido",
+      "couldn't orgasm",
+      "delayed",
+      "horny",
+      "erectile"
+    ]
+  },
+  "safety_serious": {
+    "label": "Safety & Serious Risks",
+    "description": "Potentially dangerous effects requiring clinical monitoring",
+    "domains": [
+      "seizure",
+      "agranulocytosis",
+      "serotonin syndrome",
+      "respiratory depression",
+      "overdose"
+    ],
+    "canonical_effects": [
+      "Seizure risk elevated",
+      "Respiratory depression",
+      "Respiratory depression risk",
+      "Agranulocytosis risk",
+      "Serotonin syndrome risk",
+      "Neuroleptic malignant syndrome",
+      "QTc prolongation",
+      "CV contraindications apply",
+      "Hepatotoxicity",
+      "Nephrotoxicity",
+      "Narrow therapeutic index"
+    ],
+    "reddit_indicators": [
+      "seizure",
+      "passed out",
+      "overdose",
+      "breathing slow",
+      "dangerous"
+    ]
+  },
+  "_meta": {
+    "description": "Effect taxonomy for mapping drug experience text to standardised categories",
+    "generated": "2026-06-14",
+    "category_count": 13,
+    "usage": "Match effect strings from Reddit/patient reports to canonical categories using keyword matching"
+  }
+}

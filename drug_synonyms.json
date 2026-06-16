@@ -1,0 +1,2847 @@
+{
+  "_meta": {
+    "description": "Drug name synonym dictionary for Reddit/patient text normalisation",
+    "generated": "2026-06-14",
+    "drug_count": 222,
+    "synonym_count": 751,
+    "usage": "Look up any synonym (lowercase) to get the canonical drug_id used in the PsychoTIX DRUGS array"
+  },
+  "synonyms": {
+    "quetiapine": "quetiapine",
+    "seroquel": "quetiapine",
+    "seroquel xr": "quetiapine",
+    "quetiapine xr": "quetiapine",
+    "quetia": "quetiapine",
+    "quetipine": "quetiapine",
+    "olanzapine": "olanzapine",
+    "zyprexa": "olanzapine",
+    "zyprexa zydis": "olanzapine",
+    "olanza": "olanzapine",
+    "olanzapin": "olanzapine",
+    "clozapine": "clozapine",
+    "clozaril": "clozapine",
+    "fazaclo": "clozapine",
+    "versacloz": "clozapine",
+    "cloz": "clozapine",
+    "risperidone": "risperidone",
+    "risperdal": "risperidone",
+    "risperdal consta": "risperidone",
+    "rispa": "risperidone",
+    "risperidol": "risperidone",
+    "aripiprazole": "aripiprazole",
+    "abilify": "aripiprazole",
+    "abilify maintena": "aripiprazole",
+    "aristada": "aripiprazole",
+    "ari": "aripiprazole",
+    "ziprasidone": "ziprasidone",
+    "geodon": "ziprasidone",
+    "zeldox": "ziprasidone",
+    "zip": "ziprasidone",
+    "lurasidone": "lurasidone",
+    "latuda": "lurasidone",
+    "lura": "lurasidone",
+    "haloperidol": "haloperidol",
+    "haldol": "haloperidol",
+    "haldol decanoate": "haloperidol",
+    "halo": "haloperidol",
+    "cariprazine": "cariprazine",
+    "vraylar": "cariprazine",
+    "reagila": "cariprazine",
+    "loxapine": "loxapine",
+    "loxitane": "loxapine",
+    "adasuve": "loxapine",
+    "amisulpride": "amisulpride",
+    "solian": "amisulpride",
+    "amisu": "amisulpride",
+    "brexpiprazole": "brexpiprazole",
+    "rexulti": "brexpiprazole",
+    "iloperidone": "iloperidone",
+    "fanapt": "iloperidone",
+    "fluoxetine": "fluoxetine",
+    "prozac": "fluoxetine",
+    "sarafem": "fluoxetine",
+    "fluox": "fluoxetine",
+    "prozak": "fluoxetine",
+    "fluoxetin": "fluoxetine",
+    "sertraline": "sertraline",
+    "zoloft": "sertraline",
+    "lustral": "sertraline",
+    "sert": "sertraline",
+    "zolof": "sertraline",
+    "escitalopram": "escitalopram",
+    "lexapro": "escitalopram",
+    "cipralex": "escitalopram",
+    "escit": "escitalopram",
+    "lexaprol": "escitalopram",
+    "citalopram": "citalopram",
+    "celexa": "citalopram",
+    "cipramil": "citalopram",
+    "cit": "citalopram",
+    "citalex": "citalopram",
+    "paroxetine": "paroxetine",
+    "paxil": "paroxetine",
+    "seroxat": "paroxetine",
+    "paxil cr": "paroxetine",
+    "pax": "paroxetine",
+    "parox": "paroxetine",
+    "fluvoxamine": "fluvoxamine",
+    "luvox": "fluvoxamine",
+    "faverin": "fluvoxamine",
+    "fluvox": "fluvoxamine",
+    "venlafaxine": "venlafaxine",
+    "effexor": "venlafaxine",
+    "effexor xr": "venlafaxine",
+    "venlafaxine xr": "venlafaxine",
+    "venla": "venlafaxine",
+    "venlafax": "venlafaxine",
+    "duloxetine": "duloxetine",
+    "cymbalta": "duloxetine",
+    "yentreve": "duloxetine",
+    "dulox": "duloxetine",
+    "levomilnacipran": "levomilnacipran",
+    "fetzima": "levomilnacipran",
+    "levomilna": "levomilnacipran",
+    "milnacipran": "milnacipran",
+    "savella": "milnacipran",
+    "ixel": "milnacipran",
+    "milna": "milnacipran",
+    "amitriptyline": "amitriptyline",
+    "elavil": "amitriptyline",
+    "endep": "amitriptyline",
+    "ami": "amitriptyline",
+    "amitript": "amitriptyline",
+    "amitriptylin": "amitriptyline",
+    "nortriptyline": "nortriptyline",
+    "pamelor": "nortriptyline",
+    "aventyl": "nortriptyline",
+    "nortrip": "nortriptyline",
+    "desipramine": "desipramine",
+    "norpramin": "desipramine",
+    "pertofrane": "desipramine",
+    "desip": "desipramine",
+    "clomipramine": "clomipramine",
+    "anafranil": "clomipramine",
+    "clomip": "clomipramine",
+    "clomi": "clomipramine",
+    "imipramine": "imipramine",
+    "tofranil": "imipramine",
+    "imip": "imipramine",
+    "doxepin": "doxepin",
+    "sinequan": "doxepin",
+    "silenor": "doxepin",
+    "adapin": "doxepin",
+    "mirtazapine": "mirtazapine",
+    "remeron": "mirtazapine",
+    "zispin": "mirtazapine",
+    "mirt": "mirtazapine",
+    "mirtz": "mirtazapine",
+    "bupropion": "bupropion",
+    "wellbutrin": "bupropion",
+    "zyban": "bupropion",
+    "forfivo": "bupropion",
+    "wellbutrin xl": "bupropion",
+    "wellbutrin sr": "bupropion",
+    "bupr": "bupropion",
+    "wellies": "bupropion",
+    "trazodone": "trazodone",
+    "desyrel": "trazodone",
+    "oleptro": "trazodone",
+    "traz": "trazodone",
+    "vortioxetine": "vortioxetine",
+    "trintellix": "vortioxetine",
+    "brintellix": "vortioxetine",
+    "vortio": "vortioxetine",
+    "phenelzine": "phenelzine",
+    "nardil": "phenelzine",
+    "tranylcypromine": "tranylcypromine",
+    "parnate": "tranylcypromine",
+    "isocarboxazid": "isocarboxazid",
+    "marplan": "isocarboxazid",
+    "selegiline": "selegiline",
+    "emsam": "selegiline",
+    "eldepryl": "selegiline",
+    "zelapar": "selegiline",
+    "selegil": "selegiline",
+    "agomelatine": "agomelatine",
+    "valdoxan": "agomelatine",
+    "melitor": "agomelatine",
+    "thymanax": "agomelatine",
+    "agome": "agomelatine",
+    "vilazodone": "vilazodone",
+    "viibryd": "vilazodone",
+    "lithium": "lithium",
+    "lithobid": "lithium",
+    "eskalith": "lithium",
+    "priadel": "lithium",
+    "camcolit": "lithium",
+    "li": "lithium",
+    "lithium carbonate": "lithium",
+    "lithium citrate": "lithium",
+    "lamotrigine": "lamotrigine",
+    "lamictal": "lamotrigine",
+    "lam": "lamotrigine",
+    "lamotrig": "lamotrigine",
+    "valproate": "valproate",
+    "depakote": "valproate",
+    "depakene": "valproate",
+    "epilim": "valproate",
+    "valproic acid": "valproate",
+    "sodium valproate": "valproate",
+    "divalproex": "valproate",
+    "vpa": "valproate",
+    "valp": "valproate",
+    "carbamazepine": "carbamazepine",
+    "tegretol": "carbamazepine",
+    "equetro": "carbamazepine",
+    "carbatrol": "carbamazepine",
+    "cbz": "carbamazepine",
+    "oxcarbazepine": "oxcarbazepine",
+    "trileptal": "oxcarbazepine",
+    "oxtellar": "oxcarbazepine",
+    "oxcarbaz": "oxcarbazepine",
+    "diazepam": "diazepam",
+    "valium": "diazepam",
+    "diastat": "diazepam",
+    "diaz": "diazepam",
+    "lorazepam": "lorazepam",
+    "ativan": "lorazepam",
+    "lora": "lorazepam",
+    "clonazepam": "clonazepam",
+    "klonopin": "clonazepam",
+    "rivotril": "clonazepam",
+    "clonaz": "clonazepam",
+    "kpin": "clonazepam",
+    "k-pin": "clonazepam",
+    "alprazolam": "alprazolam",
+    "xanax": "alprazolam",
+    "niravam": "alprazolam",
+    "alp": "alprazolam",
+    "xan": "alprazolam",
+    "zolpidem": "zolpidem",
+    "ambien": "zolpidem",
+    "stilnoct": "zolpidem",
+    "ambien cr": "zolpidem",
+    "zolpi": "zolpidem",
+    "buspirone": "buspirone",
+    "buspar": "buspirone",
+    "busp": "buspirone",
+    "methylphenidate": "methylphenidate",
+    "ritalin": "methylphenidate",
+    "concerta": "methylphenidate",
+    "medadate": "methylphenidate",
+    "quillivant": "methylphenidate",
+    "biphentin": "methylphenidate",
+    "mph": "methylphenidate",
+    "ritalin la": "methylphenidate",
+    "concerta xl": "methylphenidate",
+    "methylphen": "methylphenidate",
+    "amphetamine": "amphetamine",
+    "adderall": "amphetamine",
+    "adderall xr": "amphetamine",
+    "mixed amphetamine salts": "amphetamine",
+    "mas": "amphetamine",
+    "addy": "amphetamine",
+    "atomoxetine": "atomoxetine",
+    "strattera": "atomoxetine",
+    "atom": "atomoxetine",
+    "chlorpromazine": "chlorpromazine",
+    "thorazine": "chlorpromazine",
+    "largactil": "chlorpromazine",
+    "cpz": "chlorpromazine",
+    "fluphenazine": "fluphenazine",
+    "prolixin": "fluphenazine",
+    "modecate": "fluphenazine",
+    "perphenazine": "perphenazine",
+    "trilafon": "perphenazine",
+    "trifluoperazine": "trifluoperazine",
+    "stelazine": "trifluoperazine",
+    "droperidol": "droperidol",
+    "inapsine": "droperidol",
+    "droleptan": "droperidol",
+    "sulpiride": "sulpiride",
+    "dolmatil": "sulpiride",
+    "sulpor": "sulpiride",
+    "pimozide": "pimozide",
+    "orap": "pimozide",
+    "zuclopenthixol": "zuclopenthixol",
+    "clopixol": "zuclopenthixol",
+    "acuphase": "zuclopenthixol",
+    "flupenthixol": "flupenthixol",
+    "depixol": "flupenthixol",
+    "fluanxol": "flupenthixol",
+    "thiothixene": "thiothixene",
+    "navane": "thiothixene",
+    "prochlorperazine": "prochlorperazine",
+    "compazine": "prochlorperazine",
+    "stemetil": "prochlorperazine",
+    "asenapine": "asenapine",
+    "saphris": "asenapine",
+    "sycrest": "asenapine",
+    "lumateperone": "lumateperone",
+    "caplyta": "lumateperone",
+    "pimavanserin": "pimavanserin",
+    "nuplazid": "pimavanserin",
+    "zotepine": "zotepine",
+    "nipolept": "zotepine",
+    "zoleptil": "zotepine",
+    "blonanserin": "blonanserin",
+    "lonasen": "blonanserin",
+    "perospirone": "perospirone",
+    "lullan": "perospirone",
+    "xanomeline-trospium": "xanomeline_trospium",
+    "cobenfy": "xanomeline_trospium",
+    "moclobemide": "moclobemide",
+    "manerix": "moclobemide",
+    "aurorix": "moclobemide",
+    "moclo": "moclobemide",
+    "reboxetine": "reboxetine",
+    "edronax": "reboxetine",
+    "vestra": "reboxetine",
+    "rebex": "reboxetine",
+    "mianserin": "mianserin",
+    "tolvon": "mianserin",
+    "maprotiline": "maprotiline",
+    "ludiomil": "maprotiline",
+    "nefazodone": "nefazodone",
+    "serzone": "nefazodone",
+    "tianeptine": "tianeptine",
+    "stablon": "tianeptine",
+    "coaxil": "tianeptine",
+    "lofepramine": "lofepramine",
+    "gamanil": "lofepramine",
+    "lomont": "lofepramine",
+    "dosulepin": "dosulepin",
+    "prothiaden": "dosulepin",
+    "dothiepin": "dosulepin",
+    "protriptyline": "protriptyline",
+    "vivactil": "protriptyline",
+    "amoxapine": "amoxapine_standalone",
+    "asendin": "amoxapine_standalone",
+    "esketamine": "esketamine",
+    "spravato": "esketamine",
+    "esk": "esketamine",
+    "intranasal ketamine": "esketamine",
+    "dextromethorphan": "dextromethorphan",
+    "auvelity (+ bupropion)": "dextromethorphan",
+    "nuedexta (+ quinidine)": "dextromethorphan",
+    "dxm": "dextromethorphan",
+    "robitussin": "dextromethorphan",
+    "dm": "dextromethorphan",
+    "ketamine (iv)": "ketamine",
+    "ketalar": "ketamine",
+    "special k": "ketamine",
+    "ket": "ketamine",
+    "vitamin k": "ketamine",
+    "zuranolone": "zuranolone",
+    "zurzuvae": "zuranolone",
+    "brexanolone": "brexanolone",
+    "zulresso": "brexanolone",
+    "dapoxetine": "dapoxetine",
+    "priligy": "dapoxetine",
+    "psilocybin": "psilocybin",
+    "compass pathways": "psilocybin",
+    "usona (investigational)": "psilocybin",
+    "magic mushrooms": "psilocybin",
+    "shrooms": "psilocybin",
+    "mushrooms": "psilocybin",
+    "psilocin": "psilocybin",
+    "psilo": "psilocybin",
+    "4-ho-dmt": "psilocybin",
+    "lisdexamfetamine": "lisdexamfetamine",
+    "vyvanse": "lisdexamfetamine",
+    "elvanse": "lisdexamfetamine",
+    "lis": "lisdexamfetamine",
+    "ldx": "lisdexamfetamine",
+    "dextroamphetamine": "dextroamphetamine",
+    "dexedrine": "dextroamphetamine",
+    "zenzedi": "dextroamphetamine",
+    "dextrostat": "dextroamphetamine",
+    "dex": "dextroamphetamine",
+    "dextroamp": "dextroamphetamine",
+    "dexmethylphenidate": "dexmethylphenidate",
+    "focalin": "dexmethylphenidate",
+    "modafinil": "modafinil",
+    "provigil": "modafinil",
+    "modiodal": "modafinil",
+    "alertec": "modafinil",
+    "moda": "modafinil",
+    "modvigil": "modafinil",
+    "armodafinil": "armodafinil",
+    "nuvigil": "armodafinil",
+    "armod": "armodafinil",
+    "waklert": "armodafinil",
+    "solriamfetol": "solriamfetol",
+    "sunosi": "solriamfetol",
+    "pitolisant": "pitolisant",
+    "wakix": "pitolisant",
+    "viloxazine": "viloxazine",
+    "qelbree": "viloxazine",
+    "guanfacine": "guanfacine",
+    "intuniv": "guanfacine",
+    "tenex": "guanfacine",
+    "guan": "guanfacine",
+    "clonidine": "clonidine",
+    "catapres": "clonidine",
+    "kapvay": "clonidine",
+    "dixarit": "clonidine",
+    "clon": "clonidine",
+    "sodium oxybate": "sodium_oxybate",
+    "xyrem": "sodium_oxybate",
+    "lumryz": "sodium_oxybate",
+    "methadone": "methadone",
+    "dolophine": "methadone",
+    "methadose": "methadone",
+    "physeptone": "methadone",
+    "buprenorphine": "buprenorphine",
+    "subutex": "buprenorphine",
+    "suboxone (with naloxone)": "buprenorphine",
+    "suboxone": "buprenorphine",
+    "belbuca": "buprenorphine",
+    "probuphine": "buprenorphine",
+    "bup": "buprenorphine",
+    "bupe": "buprenorphine",
+    "subbies": "buprenorphine",
+    "naltrexone": "naltrexone",
+    "revia": "naltrexone",
+    "vivitrol": "naltrexone",
+    "nal": "naltrexone",
+    "naloxone": "naloxone",
+    "narcan": "naloxone",
+    "kloxxado": "naloxone",
+    "evzio": "naloxone",
+    "morphine": "morphine",
+    "mst continus": "morphine",
+    "ms contin": "morphine",
+    "zomorph": "morphine",
+    "msir": "morphine",
+    "codeine": "codeine",
+    "various (tylenol 3": "codeine",
+    "co-codamol)": "codeine",
+    "oxycodone": "oxycodone",
+    "oxycontin": "oxycodone",
+    "percocet (with paracetamol)": "oxycodone",
+    "percocet": "oxycodone",
+    "oxy": "oxycodone",
+    "hydrocodone": "hydrocodone",
+    "vicodin (with apap)": "hydrocodone",
+    "hysingla": "hydrocodone",
+    "zohydro": "hydrocodone",
+    "hydromorphone": "hydromorphone",
+    "dilaudid": "hydromorphone",
+    "palladone": "hydromorphone",
+    "fentanyl": "fentanyl",
+    "duragesic (patch)": "fentanyl",
+    "actiq": "fentanyl",
+    "sublimaze": "fentanyl",
+    "tramadol": "tramadol",
+    "ultram": "tramadol",
+    "tramal": "tramadol",
+    "zydol": "tramadol",
+    "conzip": "tramadol",
+    "tram": "tramadol",
+    "tapentadol": "tapentadol",
+    "palexia": "tapentadol",
+    "nucynta": "tapentadol",
+    "oxymorphone": "oxymorphone",
+    "opana (us)": "oxymorphone",
+    "numorphan": "oxymorphone",
+    "pethidine (meperidine)": "pethidine",
+    "demerol": "pethidine",
+    "pethidine": "pethidine",
+    "dihydrocodeine": "dihydrocodeine",
+    "dhc continus": "dihydrocodeine",
+    "df118": "dihydrocodeine",
+    "buprenorphine (analgesia)": "buprenorphine_pain",
+    "butrans (patch)": "buprenorphine_pain",
+    "temgesic": "buprenorphine_pain",
+    "butrans": "buprenorphine_pain",
+    "nalbuphine": "nalbuphine",
+    "nubain": "nalbuphine",
+    "acamprosate": "acamprosate",
+    "campral": "acamprosate",
+    "acamp": "acamprosate",
+    "disulfiram": "disulfiram",
+    "antabuse": "disulfiram",
+    "nalmefene": "nalmefene",
+    "selincro": "nalmefene",
+    "varenicline": "varenicline",
+    "chantix": "varenicline",
+    "champix": "varenicline",
+    "baclofen": "baclofen",
+    "lioresal": "baclofen",
+    "gablofen": "baclofen",
+    "lofexidine": "lofexidine",
+    "lucemyra": "lofexidine",
+    "prazosin": "prazosin",
+    "minipress": "prazosin",
+    "donepezil": "donepezil",
+    "aricept": "donepezil",
+    "done": "donepezil",
+    "rivastigmine": "rivastigmine",
+    "exelon": "rivastigmine",
+    "riva": "rivastigmine",
+    "galantamine": "galantamine",
+    "razadyne": "galantamine",
+    "reminyl": "galantamine",
+    "galan": "galantamine",
+    "memantine": "memantine",
+    "namenda": "memantine",
+    "ebixa": "memantine",
+    "mem": "memantine",
+    "pramipexole": "pramipexole",
+    "mirapex": "pramipexole",
+    "ropinirole": "ropinirole",
+    "requip": "ropinirole",
+    "rotigotine": "rotigotine",
+    "neupro": "rotigotine",
+    "rasagiline": "rasagiline",
+    "azilect": "rasagiline",
+    "safinamide": "safinamide",
+    "xadago": "safinamide",
+    "amantadine": "amantadine",
+    "symmetrel": "amantadine",
+    "gocovri": "amantadine",
+    "tetrabenazine": "tetrabenazine",
+    "nitoman": "tetrabenazine",
+    "xenazine": "tetrabenazine",
+    "valbenazine": "valbenazine",
+    "ingrezza": "valbenazine",
+    "deutetrabenazine": "deutetrabenazine",
+    "austedo": "deutetrabenazine",
+    "trihexyphenidyl": "trihexyphenidyl",
+    "artane": "trihexyphenidyl",
+    "benztropine": "benztropine",
+    "cogentin": "benztropine",
+    "levodopa / carbidopa": "levodopa_carbidopa",
+    "sinemet": "levodopa_carbidopa",
+    "madopar": "levodopa_carbidopa",
+    "duopa": "levodopa_carbidopa",
+    "entacapone": "entacapone",
+    "comtan": "entacapone",
+    "stalevo (with levodopa)": "entacapone",
+    "tolcapone": "tolcapone",
+    "tasmar": "tolcapone",
+    "opicapone": "opicapone",
+    "ongentys": "opicapone",
+    "apomorphine": "apomorphine",
+    "apo-go": "apomorphine",
+    "kynmobi": "apomorphine",
+    "cabergoline": "cabergoline",
+    "cabaser": "cabergoline",
+    "dostinex": "cabergoline",
+    "biperiden": "biperiden",
+    "akineton": "biperiden",
+    "riluzole": "riluzole",
+    "rilutek": "riluzole",
+    "teglutik": "riluzole",
+    "propranolol": "propranolol",
+    "inderal": "propranolol",
+    "atenolol": "atenolol",
+    "tenormin": "atenolol",
+    "metoprolol": "metoprolol",
+    "lopressor": "metoprolol",
+    "toprol-xl": "metoprolol",
+    "nadolol": "nadolol",
+    "corgard": "nadolol",
+    "chlordiazepoxide": "chlordiazepoxide",
+    "librium": "chlordiazepoxide",
+    "oxazepam": "oxazepam",
+    "serax": "oxazepam",
+    "temazepam": "temazepam",
+    "restoril": "temazepam",
+    "tem": "temazepam",
+    "hydroxyzine": "hydroxyzine",
+    "vistaril": "hydroxyzine",
+    "atarax": "hydroxyzine",
+    "hydrox": "hydroxyzine",
+    "suvorexant": "suvorexant",
+    "belsomra": "suvorexant",
+    "lemborexant": "lemborexant",
+    "dayvigo": "lemborexant",
+    "daridorexant": "daridorexant",
+    "quviviq": "daridorexant",
+    "zopiclone": "zopiclone",
+    "imovane": "zopiclone",
+    "zimovane": "zopiclone",
+    "zopi": "zopiclone",
+    "eszopiclone": "eszopiclone",
+    "lunesta": "eszopiclone",
+    "zaleplon": "zaleplon",
+    "sonata": "zaleplon",
+    "starnoc": "zaleplon",
+    "topiramate": "topiramate",
+    "topamax": "topiramate",
+    "qsymia": "topiramate",
+    "topi": "topiramate",
+    "pregabalin": "pregabalin",
+    "lyrica": "pregabalin",
+    "pregab": "pregabalin",
+    "gabapentin": "gabapentin",
+    "neurontin": "gabapentin",
+    "gralise": "gabapentin",
+    "gaba": "gabapentin",
+    "gabap": "gabapentin",
+    "levetiracetam": "levetiracetam",
+    "keppra": "levetiracetam",
+    "zonisamide": "zonisamide",
+    "zonegran": "zonisamide",
+    "lacosamide": "lacosamide",
+    "vimpat": "lacosamide",
+    "eslicarbazepine": "eslicarbazepine",
+    "aptiom": "eslicarbazepine",
+    "zebinix": "eslicarbazepine",
+    "cenobamate": "cenobamate",
+    "xcopri": "cenobamate",
+    "phenytoin": "phenytoin",
+    "dilantin": "phenytoin",
+    "epanutin": "phenytoin",
+    "phenobarbital": "phenobarbital",
+    "luminal": "phenobarbital",
+    "solfoton": "phenobarbital",
+    "ethosuximide": "ethosuximide",
+    "zarontin": "ethosuximide",
+    "clobazam": "clobazam",
+    "onfi": "clobazam",
+    "frisium": "clobazam",
+    "cannabidiol (cbd)": "cannabidiol",
+    "epidiolex": "cannabidiol",
+    "epidyolex": "cannabidiol",
+    "thc (\u03b49-tetrahydrocannabinol)": "thc",
+    "dronabinol": "thc",
+    "nabilone": "thc",
+    "nabiximols (sativex)": "thc",
+    "cannabis": "thc",
+    "marijuana": "thc",
+    "weed": "thc",
+    "delta-9-thc": "thc",
+    "pot": "thc",
+    "dope": "thc",
+    "ganja": "thc",
+    "reefer": "thc",
+    "brivaracetam": "brivaracetam",
+    "briviact": "brivaracetam",
+    "sumatriptan": "sumatriptan",
+    "imitrex": "sumatriptan",
+    "imigran": "sumatriptan",
+    "rizatriptan": "rizatriptan",
+    "maxalt": "rizatriptan",
+    "zolmitriptan": "zolmitriptan",
+    "zomig": "zolmitriptan",
+    "naratriptan": "naratriptan",
+    "amerge": "naratriptan",
+    "naramig": "naratriptan",
+    "eletriptan": "eletriptan",
+    "relpax": "eletriptan",
+    "frovatriptan": "frovatriptan",
+    "frova": "frovatriptan",
+    "almotriptan": "almotriptan",
+    "axert": "almotriptan",
+    "lasmiditan": "lasmiditan",
+    "reyvow": "lasmiditan",
+    "ubrogepant": "ubrogepant",
+    "ubrelvy": "ubrogepant",
+    "rimegepant": "rimegepant",
+    "nurtec odt": "rimegepant",
+    "vydura": "rimegepant",
+    "atogepant": "atogepant",
+    "qulipta": "atogepant",
+    "zavegepant": "zavegepant",
+    "zavzpret": "zavegepant",
+    "dihydroergotamine (dhe)": "dihydroergotamine",
+    "migranal": "dihydroergotamine",
+    "d.h.e. 45": "dihydroergotamine",
+    "dmt": "dmt",
+    "n,n-dimethyltryptamine": "dmt",
+    "dimethyltryptamine": "dmt",
+    "n,n-dmt": "dmt",
+    "spirit molecule": "dmt",
+    "5-meo-dmt": "fivemeodmt",
+    "5-methoxy-dmt": "fivemeodmt",
+    "lsd": "lsd",
+    "lysergic acid diethylamide": "lsd",
+    "acid": "lsd",
+    "tabs": "lsd",
+    "blotter": "lsd",
+    "lucy": "lsd",
+    "doi": "doi",
+    "2,5-dimethoxy-4-iodoamphetamine": "doi",
+    "mescaline": "mescaline",
+    "peyote": "mescaline",
+    "san pedro alkaloid": "mescaline",
+    "san pedro": "mescaline",
+    "mesc": "mescaline",
+    "2c-b": "twocb",
+    "4-bromo-2,5-dimethoxyphenethylamine": "twocb",
+    "mdma": "mdma",
+    "3,4-methylenedioxymethamphetamine": "mdma",
+    "ecstasy": "mdma",
+    "molly": "mdma",
+    "emma": "mdma",
+    "e": "mdma",
+    "mandy": "mdma",
+    "x": "mdma",
+    "methylone": "methylone",
+    "\u03b2-keto-mdma": "methylone",
+    "bk-mdma": "methylone",
+    "diphenhydramine": "diphenhydramine",
+    "benadryl": "diphenhydramine",
+    "nytol": "diphenhydramine",
+    "chlorpheniramine": "chlorpheniramine",
+    "chlor-trimeton": "chlorpheniramine",
+    "piriton": "chlorpheniramine",
+    "brompheniramine": "brompheniramine",
+    "dimetapp": "brompheniramine",
+    "bromfed": "brompheniramine",
+    "clemastine": "clemastine",
+    "tavist": "clemastine",
+    "tavegil": "clemastine",
+    "doxylamine": "doxylamine",
+    "unisom": "doxylamine",
+    "diclegis": "doxylamine",
+    "promethazine": "promethazine",
+    "phenergan": "promethazine",
+    "prometh": "promethazine",
+    "cyclizine": "cyclizine",
+    "valoid": "cyclizine",
+    "marezine": "cyclizine",
+    "meclizine": "meclizine",
+    "antivert": "meclizine",
+    "bonine": "meclizine",
+    "cyproheptadine": "cyproheptadine",
+    "periactin": "cyproheptadine",
+    "ketotifen": "ketotifen",
+    "zaditen": "ketotifen",
+    "zaditor": "ketotifen",
+    "cetirizine": "cetirizine",
+    "zyrtec": "cetirizine",
+    "reactine": "cetirizine",
+    "loratadine": "loratadine",
+    "claritin": "loratadine",
+    "clarityn": "loratadine",
+    "fexofenadine": "fexofenadine",
+    "allegra": "fexofenadine",
+    "telfast": "fexofenadine",
+    "azelastine": "azelastine",
+    "astelin": "azelastine",
+    "rhinolast": "azelastine",
+    "optilast": "azelastine",
+    "mizolastine": "mizolastine",
+    "mizollen": "mizolastine",
+    "zolistan": "mizolastine",
+    "acrivastine": "acrivastine",
+    "semprex-d (us)": "acrivastine",
+    "benadryl allergy (uk)": "acrivastine",
+    "levocetirizine": "levocetirizine",
+    "xyzal": "levocetirizine",
+    "xusal": "levocetirizine",
+    "desloratadine": "desloratadine",
+    "aerius": "desloratadine",
+    "clarinex": "desloratadine",
+    "bilastine": "bilastine",
+    "bilaxten": "bilastine",
+    "ilaxten": "bilastine",
+    "rupatadine": "rupatadine",
+    "rupafin": "rupatadine",
+    "rinialer": "rupatadine",
+    "metoclopramide": "metoclopramide",
+    "reglan": "metoclopramide",
+    "maxolon": "metoclopramide",
+    "domperidone": "domperidone",
+    "motilium": "domperidone",
+    "ondansetron": "ondansetron",
+    "zofran": "ondansetron",
+    "granisetron": "granisetron",
+    "kytril": "granisetron",
+    "sancuso": "granisetron",
+    "aprepitant": "aprepitant",
+    "emend": "aprepitant",
+    "scopolamine": "scopolamine",
+    "transderm sc\u014dp": "scopolamine",
+    "kwells": "scopolamine"
+  },
+  "drug_info": {
+    "quetiapine": {
+      "canonical_name": "Quetiapine",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "quetiapine",
+        "seroquel",
+        "seroquel xr",
+        "quetiapine xr",
+        "quetia",
+        "quetipine"
+      ]
+    },
+    "olanzapine": {
+      "canonical_name": "Olanzapine",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "olanzapine",
+        "zyprexa",
+        "zyprexa zydis",
+        "olanza",
+        "olanzapin"
+      ]
+    },
+    "clozapine": {
+      "canonical_name": "Clozapine",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "clozapine",
+        "clozaril",
+        "fazaclo",
+        "versacloz",
+        "cloz"
+      ]
+    },
+    "risperidone": {
+      "canonical_name": "Risperidone",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "risperidone",
+        "risperdal",
+        "risperdal consta",
+        "rispa",
+        "risperidol"
+      ]
+    },
+    "aripiprazole": {
+      "canonical_name": "Aripiprazole",
+      "drug_class": "Atypical Antipsychotic (Partial Agonist)",
+      "synonyms": [
+        "aripiprazole",
+        "abilify",
+        "abilify maintena",
+        "aristada",
+        "ari"
+      ]
+    },
+    "ziprasidone": {
+      "canonical_name": "Ziprasidone",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "ziprasidone",
+        "geodon",
+        "zeldox",
+        "zip"
+      ]
+    },
+    "lurasidone": {
+      "canonical_name": "Lurasidone",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "lurasidone",
+        "latuda",
+        "lura"
+      ]
+    },
+    "haloperidol": {
+      "canonical_name": "Haloperidol",
+      "drug_class": "Typical Antipsychotic",
+      "synonyms": [
+        "haloperidol",
+        "haldol",
+        "haldol decanoate",
+        "halo"
+      ]
+    },
+    "cariprazine": {
+      "canonical_name": "Cariprazine",
+      "drug_class": "Atypical Antipsychotic (Partial Agonist)",
+      "synonyms": [
+        "cariprazine",
+        "vraylar",
+        "reagila"
+      ]
+    },
+    "loxapine": {
+      "canonical_name": "Loxapine",
+      "drug_class": "Typical/Atypical Antipsychotic",
+      "synonyms": [
+        "loxapine",
+        "loxitane",
+        "adasuve"
+      ]
+    },
+    "amisulpride": {
+      "canonical_name": "Amisulpride",
+      "drug_class": "Atypical Antipsychotic (Benzamide)",
+      "synonyms": [
+        "amisulpride",
+        "solian",
+        "amisu"
+      ]
+    },
+    "brexpiprazole": {
+      "canonical_name": "Brexpiprazole",
+      "drug_class": "Atypical Antipsychotic (Partial Agonist)",
+      "synonyms": [
+        "brexpiprazole",
+        "rexulti"
+      ]
+    },
+    "iloperidone": {
+      "canonical_name": "Iloperidone",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "iloperidone",
+        "fanapt"
+      ]
+    },
+    "fluoxetine": {
+      "canonical_name": "Fluoxetine",
+      "drug_class": "SSRI",
+      "synonyms": [
+        "fluoxetine",
+        "prozac",
+        "sarafem",
+        "fluox",
+        "prozak",
+        "fluoxetin"
+      ]
+    },
+    "sertraline": {
+      "canonical_name": "Sertraline",
+      "drug_class": "SSRI",
+      "synonyms": [
+        "sertraline",
+        "zoloft",
+        "lustral",
+        "sert",
+        "zolof"
+      ]
+    },
+    "escitalopram": {
+      "canonical_name": "Escitalopram",
+      "drug_class": "SSRI",
+      "synonyms": [
+        "escitalopram",
+        "lexapro",
+        "cipralex",
+        "escit",
+        "lexaprol"
+      ]
+    },
+    "citalopram": {
+      "canonical_name": "Citalopram",
+      "drug_class": "SSRI",
+      "synonyms": [
+        "citalopram",
+        "celexa",
+        "cipramil",
+        "cit",
+        "citalex"
+      ]
+    },
+    "paroxetine": {
+      "canonical_name": "Paroxetine",
+      "drug_class": "SSRI",
+      "synonyms": [
+        "paroxetine",
+        "paxil",
+        "seroxat",
+        "paxil cr",
+        "pax",
+        "parox"
+      ]
+    },
+    "fluvoxamine": {
+      "canonical_name": "Fluvoxamine",
+      "drug_class": "SSRI",
+      "synonyms": [
+        "fluvoxamine",
+        "luvox",
+        "faverin",
+        "fluvox"
+      ]
+    },
+    "venlafaxine": {
+      "canonical_name": "Venlafaxine",
+      "drug_class": "SNRI",
+      "synonyms": [
+        "venlafaxine",
+        "effexor",
+        "effexor xr",
+        "venlafaxine xr",
+        "venla",
+        "venlafax"
+      ]
+    },
+    "duloxetine": {
+      "canonical_name": "Duloxetine",
+      "drug_class": "SNRI",
+      "synonyms": [
+        "duloxetine",
+        "cymbalta",
+        "yentreve",
+        "dulox"
+      ]
+    },
+    "levomilnacipran": {
+      "canonical_name": "Levomilnacipran",
+      "drug_class": "SNRI",
+      "synonyms": [
+        "levomilnacipran",
+        "fetzima",
+        "levomilna"
+      ]
+    },
+    "milnacipran": {
+      "canonical_name": "Milnacipran",
+      "drug_class": "SNRI",
+      "synonyms": [
+        "milnacipran",
+        "savella",
+        "ixel",
+        "milna"
+      ]
+    },
+    "amitriptyline": {
+      "canonical_name": "Amitriptyline",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "amitriptyline",
+        "elavil",
+        "endep",
+        "ami",
+        "amitript",
+        "amitriptylin"
+      ]
+    },
+    "nortriptyline": {
+      "canonical_name": "Nortriptyline",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "nortriptyline",
+        "pamelor",
+        "aventyl",
+        "nortrip"
+      ]
+    },
+    "desipramine": {
+      "canonical_name": "Desipramine",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "desipramine",
+        "norpramin",
+        "pertofrane",
+        "desip"
+      ]
+    },
+    "clomipramine": {
+      "canonical_name": "Clomipramine",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "clomipramine",
+        "anafranil",
+        "clomip",
+        "clomi"
+      ]
+    },
+    "imipramine": {
+      "canonical_name": "Imipramine",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "imipramine",
+        "tofranil",
+        "imip"
+      ]
+    },
+    "doxepin": {
+      "canonical_name": "Doxepin",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "doxepin",
+        "sinequan",
+        "silenor",
+        "adapin"
+      ]
+    },
+    "mirtazapine": {
+      "canonical_name": "Mirtazapine",
+      "drug_class": "NaSSA / \u03b12 Antagonist",
+      "synonyms": [
+        "mirtazapine",
+        "remeron",
+        "zispin",
+        "mirt",
+        "mirtz"
+      ]
+    },
+    "bupropion": {
+      "canonical_name": "Bupropion",
+      "drug_class": "NDRI / Atypical Antidepressant",
+      "synonyms": [
+        "bupropion",
+        "wellbutrin",
+        "zyban",
+        "forfivo",
+        "wellbutrin xl",
+        "wellbutrin sr",
+        "bupr",
+        "wellies"
+      ]
+    },
+    "trazodone": {
+      "canonical_name": "Trazodone",
+      "drug_class": "SARI / Atypical Antidepressant",
+      "synonyms": [
+        "trazodone",
+        "desyrel",
+        "oleptro",
+        "traz"
+      ]
+    },
+    "vortioxetine": {
+      "canonical_name": "Vortioxetine",
+      "drug_class": "Serotonin Modulator",
+      "synonyms": [
+        "vortioxetine",
+        "trintellix",
+        "brintellix",
+        "vortio"
+      ]
+    },
+    "phenelzine": {
+      "canonical_name": "Phenelzine",
+      "drug_class": "Irreversible MAOI (MAO-A/B)",
+      "synonyms": [
+        "phenelzine",
+        "nardil"
+      ]
+    },
+    "tranylcypromine": {
+      "canonical_name": "Tranylcypromine",
+      "drug_class": "Irreversible MAOI (MAO-A/B)",
+      "synonyms": [
+        "tranylcypromine",
+        "parnate"
+      ]
+    },
+    "isocarboxazid": {
+      "canonical_name": "Isocarboxazid",
+      "drug_class": "Irreversible MAOI (MAO-A/B)",
+      "synonyms": [
+        "isocarboxazid",
+        "marplan"
+      ]
+    },
+    "selegiline": {
+      "canonical_name": "Selegiline",
+      "drug_class": "MAO-B Inhibitor (selective at low dose)",
+      "synonyms": [
+        "selegiline",
+        "emsam",
+        "eldepryl",
+        "zelapar",
+        "selegil"
+      ]
+    },
+    "agomelatine": {
+      "canonical_name": "Agomelatine",
+      "drug_class": "Melatonergic Antidepressant",
+      "synonyms": [
+        "agomelatine",
+        "valdoxan",
+        "melitor",
+        "thymanax",
+        "agome"
+      ]
+    },
+    "vilazodone": {
+      "canonical_name": "Vilazodone",
+      "drug_class": "SSRI / 5-HT1A Partial Agonist (SPARI)",
+      "synonyms": [
+        "vilazodone",
+        "viibryd"
+      ]
+    },
+    "lithium": {
+      "canonical_name": "Lithium",
+      "drug_class": "Mood Stabilizer",
+      "synonyms": [
+        "lithium",
+        "lithobid",
+        "eskalith",
+        "priadel",
+        "camcolit",
+        "li",
+        "lithium carbonate",
+        "lithium citrate"
+      ]
+    },
+    "lamotrigine": {
+      "canonical_name": "Lamotrigine",
+      "drug_class": "Mood Stabilizer / Anticonvulsant",
+      "synonyms": [
+        "lamotrigine",
+        "lamictal",
+        "lam",
+        "lamotrig"
+      ]
+    },
+    "valproate": {
+      "canonical_name": "Valproate",
+      "drug_class": "Mood Stabilizer / Anticonvulsant",
+      "synonyms": [
+        "valproate",
+        "depakote",
+        "depakene",
+        "epilim",
+        "valproic acid",
+        "sodium valproate",
+        "divalproex",
+        "vpa",
+        "valp"
+      ]
+    },
+    "carbamazepine": {
+      "canonical_name": "Carbamazepine",
+      "drug_class": "Mood Stabilizer / Anticonvulsant",
+      "synonyms": [
+        "carbamazepine",
+        "tegretol",
+        "equetro",
+        "carbatrol",
+        "cbz"
+      ]
+    },
+    "oxcarbazepine": {
+      "canonical_name": "Oxcarbazepine",
+      "drug_class": "Mood Stabilizer / Anticonvulsant",
+      "synonyms": [
+        "oxcarbazepine",
+        "trileptal",
+        "oxtellar",
+        "oxcarbaz"
+      ]
+    },
+    "diazepam": {
+      "canonical_name": "Diazepam",
+      "drug_class": "Benzodiazepine",
+      "synonyms": [
+        "diazepam",
+        "valium",
+        "diastat",
+        "diaz"
+      ]
+    },
+    "lorazepam": {
+      "canonical_name": "Lorazepam",
+      "drug_class": "Benzodiazepine",
+      "synonyms": [
+        "lorazepam",
+        "ativan",
+        "lora"
+      ]
+    },
+    "clonazepam": {
+      "canonical_name": "Clonazepam",
+      "drug_class": "Benzodiazepine",
+      "synonyms": [
+        "clonazepam",
+        "klonopin",
+        "rivotril",
+        "clonaz",
+        "kpin",
+        "k-pin"
+      ]
+    },
+    "alprazolam": {
+      "canonical_name": "Alprazolam",
+      "drug_class": "Benzodiazepine",
+      "synonyms": [
+        "alprazolam",
+        "xanax",
+        "niravam",
+        "alp",
+        "xan"
+      ]
+    },
+    "zolpidem": {
+      "canonical_name": "Zolpidem",
+      "drug_class": "Non-benzodiazepine Hypnotic (Z-drug)",
+      "synonyms": [
+        "zolpidem",
+        "ambien",
+        "stilnoct",
+        "ambien cr",
+        "zolpi"
+      ]
+    },
+    "buspirone": {
+      "canonical_name": "Buspirone",
+      "drug_class": "Azapirone / Anxiolytic",
+      "synonyms": [
+        "buspirone",
+        "buspar",
+        "busp"
+      ]
+    },
+    "methylphenidate": {
+      "canonical_name": "Methylphenidate",
+      "drug_class": "Stimulant",
+      "synonyms": [
+        "methylphenidate",
+        "ritalin",
+        "concerta",
+        "medadate",
+        "quillivant",
+        "biphentin",
+        "mph",
+        "ritalin la",
+        "concerta xl",
+        "methylphen"
+      ]
+    },
+    "amphetamine": {
+      "canonical_name": "Amphetamine",
+      "drug_class": "Stimulant",
+      "synonyms": [
+        "amphetamine",
+        "adderall",
+        "adderall xr",
+        "mixed amphetamine salts",
+        "mas",
+        "addy"
+      ]
+    },
+    "atomoxetine": {
+      "canonical_name": "Atomoxetine",
+      "drug_class": "Selective NET Inhibitor",
+      "synonyms": [
+        "atomoxetine",
+        "strattera",
+        "atom"
+      ]
+    },
+    "chlorpromazine": {
+      "canonical_name": "Chlorpromazine",
+      "drug_class": "Typical Antipsychotic (Phenothiazine)",
+      "synonyms": [
+        "chlorpromazine",
+        "thorazine",
+        "largactil",
+        "cpz"
+      ]
+    },
+    "fluphenazine": {
+      "canonical_name": "Fluphenazine",
+      "drug_class": "Typical Antipsychotic (Phenothiazine)",
+      "synonyms": [
+        "fluphenazine",
+        "prolixin",
+        "modecate"
+      ]
+    },
+    "perphenazine": {
+      "canonical_name": "Perphenazine",
+      "drug_class": "Typical Antipsychotic (Phenothiazine)",
+      "synonyms": [
+        "perphenazine",
+        "trilafon"
+      ]
+    },
+    "trifluoperazine": {
+      "canonical_name": "Trifluoperazine",
+      "drug_class": "Typical Antipsychotic (Phenothiazine)",
+      "synonyms": [
+        "trifluoperazine",
+        "stelazine"
+      ]
+    },
+    "droperidol": {
+      "canonical_name": "Droperidol",
+      "drug_class": "Typical Antipsychotic (Butyrophenone)",
+      "synonyms": [
+        "droperidol",
+        "inapsine",
+        "droleptan"
+      ]
+    },
+    "sulpiride": {
+      "canonical_name": "Sulpiride",
+      "drug_class": "Typical Antipsychotic (Benzamide)",
+      "synonyms": [
+        "sulpiride",
+        "dolmatil",
+        "sulpor"
+      ]
+    },
+    "pimozide": {
+      "canonical_name": "Pimozide",
+      "drug_class": "Typical Antipsychotic (Diphenylbutylpiperidine)",
+      "synonyms": [
+        "pimozide",
+        "orap"
+      ]
+    },
+    "zuclopenthixol": {
+      "canonical_name": "Zuclopenthixol",
+      "drug_class": "Typical Antipsychotic (Thioxanthene)",
+      "synonyms": [
+        "zuclopenthixol",
+        "clopixol",
+        "acuphase"
+      ]
+    },
+    "flupenthixol": {
+      "canonical_name": "Flupenthixol",
+      "drug_class": "Typical/Atypical Antipsychotic (Thioxanthene)",
+      "synonyms": [
+        "flupenthixol",
+        "depixol",
+        "fluanxol"
+      ]
+    },
+    "thiothixene": {
+      "canonical_name": "Thiothixene",
+      "drug_class": "Typical Antipsychotic (Thioxanthene)",
+      "synonyms": [
+        "thiothixene",
+        "navane"
+      ]
+    },
+    "prochlorperazine": {
+      "canonical_name": "Prochlorperazine",
+      "drug_class": "Typical Antipsychotic / Antiemetic (Phenothiazine)",
+      "synonyms": [
+        "prochlorperazine",
+        "compazine",
+        "stemetil"
+      ]
+    },
+    "asenapine": {
+      "canonical_name": "Asenapine",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "asenapine",
+        "saphris",
+        "sycrest"
+      ]
+    },
+    "lumateperone": {
+      "canonical_name": "Lumateperone",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "lumateperone",
+        "caplyta"
+      ]
+    },
+    "pimavanserin": {
+      "canonical_name": "Pimavanserin",
+      "drug_class": "Inverse Agonist (Selective 5-HT2A/2C)",
+      "synonyms": [
+        "pimavanserin",
+        "nuplazid"
+      ]
+    },
+    "zotepine": {
+      "canonical_name": "Zotepine",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "zotepine",
+        "nipolept",
+        "zoleptil"
+      ]
+    },
+    "blonanserin": {
+      "canonical_name": "Blonanserin",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "blonanserin",
+        "lonasen"
+      ]
+    },
+    "perospirone": {
+      "canonical_name": "Perospirone",
+      "drug_class": "Atypical Antipsychotic",
+      "synonyms": [
+        "perospirone",
+        "lullan"
+      ]
+    },
+    "xanomeline_trospium": {
+      "canonical_name": "Xanomeline-Trospium",
+      "drug_class": "M1/M4 Muscarinic Agonist (+ peripheral anticholinergic)",
+      "synonyms": [
+        "xanomeline-trospium",
+        "cobenfy"
+      ]
+    },
+    "moclobemide": {
+      "canonical_name": "Moclobemide",
+      "drug_class": "RIMA (Reversible MAOI-A)",
+      "synonyms": [
+        "moclobemide",
+        "manerix",
+        "aurorix",
+        "moclo"
+      ]
+    },
+    "reboxetine": {
+      "canonical_name": "Reboxetine",
+      "drug_class": "Selective NRI (Norepinephrine Reuptake Inhibitor)",
+      "synonyms": [
+        "reboxetine",
+        "edronax",
+        "vestra",
+        "rebex"
+      ]
+    },
+    "mianserin": {
+      "canonical_name": "Mianserin",
+      "drug_class": "Tetracyclic NaSSA",
+      "synonyms": [
+        "mianserin",
+        "tolvon"
+      ]
+    },
+    "maprotiline": {
+      "canonical_name": "Maprotiline",
+      "drug_class": "Tetracyclic Antidepressant",
+      "synonyms": [
+        "maprotiline",
+        "ludiomil"
+      ]
+    },
+    "nefazodone": {
+      "canonical_name": "Nefazodone",
+      "drug_class": "SARI / Atypical Antidepressant",
+      "synonyms": [
+        "nefazodone",
+        "serzone"
+      ]
+    },
+    "tianeptine": {
+      "canonical_name": "Tianeptine",
+      "drug_class": "Atypical Antidepressant (\u03bc-Opioid Agonist)",
+      "synonyms": [
+        "tianeptine",
+        "stablon",
+        "coaxil"
+      ]
+    },
+    "lofepramine": {
+      "canonical_name": "Lofepramine",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "lofepramine",
+        "gamanil",
+        "lomont"
+      ]
+    },
+    "dosulepin": {
+      "canonical_name": "Dosulepin",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "dosulepin",
+        "prothiaden",
+        "dothiepin"
+      ]
+    },
+    "protriptyline": {
+      "canonical_name": "Protriptyline",
+      "drug_class": "Tricyclic Antidepressant",
+      "synonyms": [
+        "protriptyline",
+        "vivactil"
+      ]
+    },
+    "amoxapine_standalone": {
+      "canonical_name": "Amoxapine",
+      "drug_class": "Tetracyclic Antidepressant / Antipsychotic",
+      "synonyms": [
+        "amoxapine",
+        "asendin"
+      ]
+    },
+    "esketamine": {
+      "canonical_name": "Esketamine",
+      "drug_class": "NMDA Antagonist (Intranasal)",
+      "synonyms": [
+        "esketamine",
+        "spravato",
+        "esk",
+        "intranasal ketamine"
+      ]
+    },
+    "dextromethorphan": {
+      "canonical_name": "Dextromethorphan",
+      "drug_class": "NMDA Antagonist / \u03c31 Agonist",
+      "synonyms": [
+        "dextromethorphan",
+        "auvelity (+ bupropion)",
+        "nuedexta (+ quinidine)",
+        "dxm",
+        "robitussin",
+        "dm"
+      ]
+    },
+    "ketamine": {
+      "canonical_name": "Ketamine (IV)",
+      "drug_class": "NMDA Antagonist / Dissociative",
+      "synonyms": [
+        "ketamine (iv)",
+        "ketalar",
+        "special k",
+        "ket",
+        "vitamin k"
+      ]
+    },
+    "zuranolone": {
+      "canonical_name": "Zuranolone",
+      "drug_class": "Neurosteroid GABA-A Modulator",
+      "synonyms": [
+        "zuranolone",
+        "zurzuvae"
+      ]
+    },
+    "brexanolone": {
+      "canonical_name": "Brexanolone",
+      "drug_class": "Neurosteroid GABA-A Modulator (IV)",
+      "synonyms": [
+        "brexanolone",
+        "zulresso"
+      ]
+    },
+    "dapoxetine": {
+      "canonical_name": "Dapoxetine",
+      "drug_class": "SSRI (Short-acting)",
+      "synonyms": [
+        "dapoxetine",
+        "priligy"
+      ]
+    },
+    "psilocybin": {
+      "canonical_name": "Psilocybin",
+      "drug_class": "Psychedelic (5-HT2A Agonist)",
+      "synonyms": [
+        "psilocybin",
+        "compass pathways",
+        "usona (investigational)",
+        "magic mushrooms",
+        "shrooms",
+        "mushrooms",
+        "psilocin",
+        "psilo",
+        "4-ho-dmt"
+      ]
+    },
+    "lisdexamfetamine": {
+      "canonical_name": "Lisdexamfetamine",
+      "drug_class": "Stimulant (Prodrug)",
+      "synonyms": [
+        "lisdexamfetamine",
+        "vyvanse",
+        "elvanse",
+        "lis",
+        "ldx"
+      ]
+    },
+    "dextroamphetamine": {
+      "canonical_name": "Dextroamphetamine",
+      "drug_class": "Stimulant (d-isomer amphetamine)",
+      "synonyms": [
+        "dextroamphetamine",
+        "dexedrine",
+        "zenzedi",
+        "dextrostat",
+        "dex",
+        "dextroamp"
+      ]
+    },
+    "dexmethylphenidate": {
+      "canonical_name": "Dexmethylphenidate",
+      "drug_class": "Stimulant (d-isomer MPH)",
+      "synonyms": [
+        "dexmethylphenidate",
+        "focalin"
+      ]
+    },
+    "modafinil": {
+      "canonical_name": "Modafinil",
+      "drug_class": "Wakefulness Agent (DAT inhibitor)",
+      "synonyms": [
+        "modafinil",
+        "provigil",
+        "modiodal",
+        "alertec",
+        "moda",
+        "modvigil"
+      ]
+    },
+    "armodafinil": {
+      "canonical_name": "Armodafinil",
+      "drug_class": "Wakefulness Agent (R-modafinil)",
+      "synonyms": [
+        "armodafinil",
+        "nuvigil",
+        "armod",
+        "waklert"
+      ]
+    },
+    "solriamfetol": {
+      "canonical_name": "Solriamfetol",
+      "drug_class": "DA/NE Reuptake Inhibitor (Wakefulness)",
+      "synonyms": [
+        "solriamfetol",
+        "sunosi"
+      ]
+    },
+    "pitolisant": {
+      "canonical_name": "Pitolisant",
+      "drug_class": "H3 Receptor Antagonist/Inverse Agonist",
+      "synonyms": [
+        "pitolisant",
+        "wakix"
+      ]
+    },
+    "viloxazine": {
+      "canonical_name": "Viloxazine",
+      "drug_class": "Selective NRI (ADHD)",
+      "synonyms": [
+        "viloxazine",
+        "qelbree"
+      ]
+    },
+    "guanfacine": {
+      "canonical_name": "Guanfacine",
+      "drug_class": "\u03b12A Agonist",
+      "synonyms": [
+        "guanfacine",
+        "intuniv",
+        "tenex",
+        "guan"
+      ]
+    },
+    "clonidine": {
+      "canonical_name": "Clonidine",
+      "drug_class": "\u03b12 Agonist",
+      "synonyms": [
+        "clonidine",
+        "catapres",
+        "kapvay",
+        "dixarit",
+        "clon"
+      ]
+    },
+    "sodium_oxybate": {
+      "canonical_name": "Sodium Oxybate",
+      "drug_class": "GHB / GABA-B Agonist",
+      "synonyms": [
+        "sodium oxybate",
+        "xyrem",
+        "lumryz"
+      ]
+    },
+    "methadone": {
+      "canonical_name": "Methadone",
+      "drug_class": "Full Opioid Agonist",
+      "synonyms": [
+        "methadone",
+        "dolophine",
+        "methadose",
+        "physeptone"
+      ]
+    },
+    "buprenorphine": {
+      "canonical_name": "Buprenorphine",
+      "drug_class": "Partial Opioid Agonist / Kappa Antagonist",
+      "synonyms": [
+        "buprenorphine",
+        "subutex",
+        "suboxone (with naloxone)",
+        "suboxone",
+        "belbuca",
+        "probuphine",
+        "bup",
+        "bupe",
+        "subbies"
+      ]
+    },
+    "naltrexone": {
+      "canonical_name": "Naltrexone",
+      "drug_class": "Opioid Antagonist",
+      "synonyms": [
+        "naltrexone",
+        "revia",
+        "vivitrol",
+        "nal"
+      ]
+    },
+    "naloxone": {
+      "canonical_name": "Naloxone",
+      "drug_class": "Opioid Antagonist (Reversal Agent)",
+      "synonyms": [
+        "naloxone",
+        "narcan",
+        "kloxxado",
+        "evzio"
+      ]
+    },
+    "morphine": {
+      "canonical_name": "Morphine",
+      "drug_class": "Full Opioid Agonist",
+      "synonyms": [
+        "morphine",
+        "mst continus",
+        "ms contin",
+        "zomorph",
+        "msir"
+      ]
+    },
+    "codeine": {
+      "canonical_name": "Codeine",
+      "drug_class": "Opioid Prodrug (Weak)",
+      "synonyms": [
+        "codeine",
+        "various (tylenol 3",
+        "co-codamol)"
+      ]
+    },
+    "oxycodone": {
+      "canonical_name": "Oxycodone",
+      "drug_class": "Full Opioid Agonist",
+      "synonyms": [
+        "oxycodone",
+        "oxycontin",
+        "percocet (with paracetamol)",
+        "percocet",
+        "oxy"
+      ]
+    },
+    "hydrocodone": {
+      "canonical_name": "Hydrocodone",
+      "drug_class": "Full Opioid Agonist",
+      "synonyms": [
+        "hydrocodone",
+        "vicodin (with apap)",
+        "hysingla",
+        "zohydro"
+      ]
+    },
+    "hydromorphone": {
+      "canonical_name": "Hydromorphone",
+      "drug_class": "Full Opioid Agonist",
+      "synonyms": [
+        "hydromorphone",
+        "dilaudid",
+        "palladone"
+      ]
+    },
+    "fentanyl": {
+      "canonical_name": "Fentanyl",
+      "drug_class": "Full Opioid Agonist (Highly Potent)",
+      "synonyms": [
+        "fentanyl",
+        "duragesic (patch)",
+        "actiq",
+        "sublimaze"
+      ]
+    },
+    "tramadol": {
+      "canonical_name": "Tramadol",
+      "drug_class": "Weak Opioid Agonist / SNRI",
+      "synonyms": [
+        "tramadol",
+        "ultram",
+        "tramal",
+        "zydol",
+        "conzip",
+        "tram"
+      ]
+    },
+    "tapentadol": {
+      "canonical_name": "Tapentadol",
+      "drug_class": "\u03bc-Opioid Agonist / NET Inhibitor",
+      "synonyms": [
+        "tapentadol",
+        "palexia",
+        "nucynta"
+      ]
+    },
+    "oxymorphone": {
+      "canonical_name": "Oxymorphone",
+      "drug_class": "Full Opioid Agonist",
+      "synonyms": [
+        "oxymorphone",
+        "opana (us)",
+        "numorphan"
+      ]
+    },
+    "pethidine": {
+      "canonical_name": "Pethidine (Meperidine)",
+      "drug_class": "Full Opioid Agonist (Falling Out of Use)",
+      "synonyms": [
+        "pethidine (meperidine)",
+        "demerol",
+        "pethidine"
+      ]
+    },
+    "dihydrocodeine": {
+      "canonical_name": "Dihydrocodeine",
+      "drug_class": "Opioid Agonist (Weak\u2013Moderate)",
+      "synonyms": [
+        "dihydrocodeine",
+        "dhc continus",
+        "df118"
+      ]
+    },
+    "buprenorphine_pain": {
+      "canonical_name": "Buprenorphine (analgesia)",
+      "drug_class": "Partial Opioid Agonist (Analgesic doses)",
+      "synonyms": [
+        "buprenorphine (analgesia)",
+        "butrans (patch)",
+        "temgesic",
+        "butrans"
+      ]
+    },
+    "nalbuphine": {
+      "canonical_name": "Nalbuphine",
+      "drug_class": "Mixed Opioid Agonist-Antagonist",
+      "synonyms": [
+        "nalbuphine",
+        "nubain"
+      ]
+    },
+    "acamprosate": {
+      "canonical_name": "Acamprosate",
+      "drug_class": "GABA Modulator / NMDA Antagonist (AUD)",
+      "synonyms": [
+        "acamprosate",
+        "campral",
+        "acamp"
+      ]
+    },
+    "disulfiram": {
+      "canonical_name": "Disulfiram",
+      "drug_class": "ALDH Inhibitor (AUD Aversion)",
+      "synonyms": [
+        "disulfiram",
+        "antabuse"
+      ]
+    },
+    "nalmefene": {
+      "canonical_name": "Nalmefene",
+      "drug_class": "Opioid Partial Agonist/Antagonist",
+      "synonyms": [
+        "nalmefene",
+        "selincro"
+      ]
+    },
+    "varenicline": {
+      "canonical_name": "Varenicline",
+      "drug_class": "Partial Nicotinic ACh Agonist (Smoking Cessation)",
+      "synonyms": [
+        "varenicline",
+        "chantix",
+        "champix"
+      ]
+    },
+    "baclofen": {
+      "canonical_name": "Baclofen",
+      "drug_class": "GABA-B Agonist",
+      "synonyms": [
+        "baclofen",
+        "lioresal",
+        "gablofen"
+      ]
+    },
+    "lofexidine": {
+      "canonical_name": "Lofexidine",
+      "drug_class": "\u03b12 Agonist (Opioid Withdrawal)",
+      "synonyms": [
+        "lofexidine",
+        "lucemyra"
+      ]
+    },
+    "prazosin": {
+      "canonical_name": "Prazosin",
+      "drug_class": "\u03b11 Antagonist",
+      "synonyms": [
+        "prazosin",
+        "minipress"
+      ]
+    },
+    "donepezil": {
+      "canonical_name": "Donepezil",
+      "drug_class": "Acetylcholinesterase Inhibitor",
+      "synonyms": [
+        "donepezil",
+        "aricept",
+        "done"
+      ]
+    },
+    "rivastigmine": {
+      "canonical_name": "Rivastigmine",
+      "drug_class": "Dual AChE/BuChE Inhibitor",
+      "synonyms": [
+        "rivastigmine",
+        "exelon",
+        "riva"
+      ]
+    },
+    "galantamine": {
+      "canonical_name": "Galantamine",
+      "drug_class": "AChE Inhibitor + Nicotinic Modulator",
+      "synonyms": [
+        "galantamine",
+        "razadyne",
+        "reminyl",
+        "galan"
+      ]
+    },
+    "memantine": {
+      "canonical_name": "Memantine",
+      "drug_class": "NMDA Antagonist (Uncompetitive)",
+      "synonyms": [
+        "memantine",
+        "namenda",
+        "ebixa",
+        "mem"
+      ]
+    },
+    "pramipexole": {
+      "canonical_name": "Pramipexole",
+      "drug_class": "D2/D3 Agonist",
+      "synonyms": [
+        "pramipexole",
+        "mirapex"
+      ]
+    },
+    "ropinirole": {
+      "canonical_name": "Ropinirole",
+      "drug_class": "D2/D3 Agonist",
+      "synonyms": [
+        "ropinirole",
+        "requip"
+      ]
+    },
+    "rotigotine": {
+      "canonical_name": "Rotigotine",
+      "drug_class": "D2/D3 Agonist (Transdermal)",
+      "synonyms": [
+        "rotigotine",
+        "neupro"
+      ]
+    },
+    "rasagiline": {
+      "canonical_name": "Rasagiline",
+      "drug_class": "MAO-B Inhibitor (Irreversible)",
+      "synonyms": [
+        "rasagiline",
+        "azilect"
+      ]
+    },
+    "safinamide": {
+      "canonical_name": "Safinamide",
+      "drug_class": "MAO-B Inhibitor + Na-Channel Blocker",
+      "synonyms": [
+        "safinamide",
+        "xadago"
+      ]
+    },
+    "amantadine": {
+      "canonical_name": "Amantadine",
+      "drug_class": "NMDA Antagonist / DA Releaser",
+      "synonyms": [
+        "amantadine",
+        "symmetrel",
+        "gocovri"
+      ]
+    },
+    "tetrabenazine": {
+      "canonical_name": "Tetrabenazine",
+      "drug_class": "VMAT2 Inhibitor",
+      "synonyms": [
+        "tetrabenazine",
+        "nitoman",
+        "xenazine"
+      ]
+    },
+    "valbenazine": {
+      "canonical_name": "Valbenazine",
+      "drug_class": "VMAT2 Inhibitor",
+      "synonyms": [
+        "valbenazine",
+        "ingrezza"
+      ]
+    },
+    "deutetrabenazine": {
+      "canonical_name": "Deutetrabenazine",
+      "drug_class": "VMAT2 Inhibitor",
+      "synonyms": [
+        "deutetrabenazine",
+        "austedo"
+      ]
+    },
+    "trihexyphenidyl": {
+      "canonical_name": "Trihexyphenidyl",
+      "drug_class": "Anticholinergic (M1 Antagonist)",
+      "synonyms": [
+        "trihexyphenidyl",
+        "artane"
+      ]
+    },
+    "benztropine": {
+      "canonical_name": "Benztropine",
+      "drug_class": "Anticholinergic + DA Reuptake Inhibitor",
+      "synonyms": [
+        "benztropine",
+        "cogentin"
+      ]
+    },
+    "levodopa_carbidopa": {
+      "canonical_name": "Levodopa / Carbidopa",
+      "drug_class": "Dopamine Precursor + DDC Inhibitor",
+      "synonyms": [
+        "levodopa / carbidopa",
+        "sinemet",
+        "madopar",
+        "duopa"
+      ]
+    },
+    "entacapone": {
+      "canonical_name": "Entacapone",
+      "drug_class": "COMT Inhibitor (Peripheral)",
+      "synonyms": [
+        "entacapone",
+        "comtan",
+        "stalevo (with levodopa)"
+      ]
+    },
+    "tolcapone": {
+      "canonical_name": "Tolcapone",
+      "drug_class": "COMT Inhibitor (Central + Peripheral)",
+      "synonyms": [
+        "tolcapone",
+        "tasmar"
+      ]
+    },
+    "opicapone": {
+      "canonical_name": "Opicapone",
+      "drug_class": "COMT Inhibitor (Once-Daily Peripheral)",
+      "synonyms": [
+        "opicapone",
+        "ongentys"
+      ]
+    },
+    "apomorphine": {
+      "canonical_name": "Apomorphine",
+      "drug_class": "D1/D2 Agonist (Non-ergot)",
+      "synonyms": [
+        "apomorphine",
+        "apo-go",
+        "kynmobi"
+      ]
+    },
+    "cabergoline": {
+      "canonical_name": "Cabergoline",
+      "drug_class": "Ergot DA Agonist (D2/D3)",
+      "synonyms": [
+        "cabergoline",
+        "cabaser",
+        "dostinex"
+      ]
+    },
+    "biperiden": {
+      "canonical_name": "Biperiden",
+      "drug_class": "Anticholinergic (M1 Antagonist)",
+      "synonyms": [
+        "biperiden",
+        "akineton"
+      ]
+    },
+    "riluzole": {
+      "canonical_name": "Riluzole",
+      "drug_class": "Glutamate Modulator (Na-channel / Antiglutamatergic)",
+      "synonyms": [
+        "riluzole",
+        "rilutek",
+        "teglutik"
+      ]
+    },
+    "propranolol": {
+      "canonical_name": "Propranolol",
+      "drug_class": "Non-selective \u03b2-Blocker (lipophilic)",
+      "synonyms": [
+        "propranolol",
+        "inderal"
+      ]
+    },
+    "atenolol": {
+      "canonical_name": "Atenolol",
+      "drug_class": "Selective \u03b21-Blocker (hydrophilic)",
+      "synonyms": [
+        "atenolol",
+        "tenormin"
+      ]
+    },
+    "metoprolol": {
+      "canonical_name": "Metoprolol",
+      "drug_class": "Selective \u03b21-Blocker (moderate lipophilicity)",
+      "synonyms": [
+        "metoprolol",
+        "lopressor",
+        "toprol-xl"
+      ]
+    },
+    "nadolol": {
+      "canonical_name": "Nadolol",
+      "drug_class": "Non-selective \u03b2-Blocker (hydrophilic)",
+      "synonyms": [
+        "nadolol",
+        "corgard"
+      ]
+    },
+    "chlordiazepoxide": {
+      "canonical_name": "Chlordiazepoxide",
+      "drug_class": "Benzodiazepine",
+      "synonyms": [
+        "chlordiazepoxide",
+        "librium"
+      ]
+    },
+    "oxazepam": {
+      "canonical_name": "Oxazepam",
+      "drug_class": "Benzodiazepine",
+      "synonyms": [
+        "oxazepam",
+        "serax"
+      ]
+    },
+    "temazepam": {
+      "canonical_name": "Temazepam",
+      "drug_class": "Benzodiazepine (Hypnotic)",
+      "synonyms": [
+        "temazepam",
+        "restoril",
+        "tem"
+      ]
+    },
+    "hydroxyzine": {
+      "canonical_name": "Hydroxyzine",
+      "drug_class": "Antihistamine / Anxiolytic (H1 Antagonist)",
+      "synonyms": [
+        "hydroxyzine",
+        "vistaril",
+        "atarax",
+        "hydrox"
+      ]
+    },
+    "suvorexant": {
+      "canonical_name": "Suvorexant",
+      "drug_class": "DORA (Dual Orexin Receptor Antagonist)",
+      "synonyms": [
+        "suvorexant",
+        "belsomra"
+      ]
+    },
+    "lemborexant": {
+      "canonical_name": "Lemborexant",
+      "drug_class": "DORA (Dual Orexin Receptor Antagonist)",
+      "synonyms": [
+        "lemborexant",
+        "dayvigo"
+      ]
+    },
+    "daridorexant": {
+      "canonical_name": "Daridorexant",
+      "drug_class": "DORA (Dual Orexin Receptor Antagonist)",
+      "synonyms": [
+        "daridorexant",
+        "quviviq"
+      ]
+    },
+    "zopiclone": {
+      "canonical_name": "Zopiclone",
+      "drug_class": "Non-BZD Hypnotic (Z-drug)",
+      "synonyms": [
+        "zopiclone",
+        "imovane",
+        "zimovane",
+        "zopi"
+      ]
+    },
+    "eszopiclone": {
+      "canonical_name": "Eszopiclone",
+      "drug_class": "Non-BZD Hypnotic (Z-drug)",
+      "synonyms": [
+        "eszopiclone",
+        "lunesta"
+      ]
+    },
+    "zaleplon": {
+      "canonical_name": "Zaleplon",
+      "drug_class": "Non-BZD Hypnotic (Z-drug)",
+      "synonyms": [
+        "zaleplon",
+        "sonata",
+        "starnoc"
+      ]
+    },
+    "topiramate": {
+      "canonical_name": "Topiramate",
+      "drug_class": "Anticonvulsant / Mood Stabiliser",
+      "synonyms": [
+        "topiramate",
+        "topamax",
+        "qsymia",
+        "topi"
+      ]
+    },
+    "pregabalin": {
+      "canonical_name": "Pregabalin",
+      "drug_class": "Gabapentinoid",
+      "synonyms": [
+        "pregabalin",
+        "lyrica",
+        "pregab"
+      ]
+    },
+    "gabapentin": {
+      "canonical_name": "Gabapentin",
+      "drug_class": "Gabapentinoid",
+      "synonyms": [
+        "gabapentin",
+        "neurontin",
+        "gralise",
+        "gaba",
+        "gabap"
+      ]
+    },
+    "levetiracetam": {
+      "canonical_name": "Levetiracetam",
+      "drug_class": "Anticonvulsant (SV2A Ligand)",
+      "synonyms": [
+        "levetiracetam",
+        "keppra"
+      ]
+    },
+    "zonisamide": {
+      "canonical_name": "Zonisamide",
+      "drug_class": "Anticonvulsant",
+      "synonyms": [
+        "zonisamide",
+        "zonegran"
+      ]
+    },
+    "lacosamide": {
+      "canonical_name": "Lacosamide",
+      "drug_class": "Anticonvulsant (Na-channel slow inactivator)",
+      "synonyms": [
+        "lacosamide",
+        "vimpat"
+      ]
+    },
+    "eslicarbazepine": {
+      "canonical_name": "Eslicarbazepine",
+      "drug_class": "Anticonvulsant (Na-channel blocker)",
+      "synonyms": [
+        "eslicarbazepine",
+        "aptiom",
+        "zebinix"
+      ]
+    },
+    "cenobamate": {
+      "canonical_name": "Cenobamate",
+      "drug_class": "Anticonvulsant",
+      "synonyms": [
+        "cenobamate",
+        "xcopri"
+      ]
+    },
+    "phenytoin": {
+      "canonical_name": "Phenytoin",
+      "drug_class": "Anticonvulsant (Na-channel blocker)",
+      "synonyms": [
+        "phenytoin",
+        "dilantin",
+        "epanutin"
+      ]
+    },
+    "phenobarbital": {
+      "canonical_name": "Phenobarbital",
+      "drug_class": "Barbiturate / Anticonvulsant",
+      "synonyms": [
+        "phenobarbital",
+        "luminal",
+        "solfoton"
+      ]
+    },
+    "ethosuximide": {
+      "canonical_name": "Ethosuximide",
+      "drug_class": "Succinimide Anticonvulsant (T-Ca channel blocker)",
+      "synonyms": [
+        "ethosuximide",
+        "zarontin"
+      ]
+    },
+    "clobazam": {
+      "canonical_name": "Clobazam",
+      "drug_class": "Benzodiazepine (1,5-BZD) / Anticonvulsant",
+      "synonyms": [
+        "clobazam",
+        "onfi",
+        "frisium"
+      ]
+    },
+    "cannabidiol": {
+      "canonical_name": "Cannabidiol (CBD)",
+      "drug_class": "Cannabinoid / Anticonvulsant",
+      "synonyms": [
+        "cannabidiol (cbd)",
+        "epidiolex",
+        "epidyolex"
+      ]
+    },
+    "thc": {
+      "canonical_name": "THC (\u03949-Tetrahydrocannabinol)",
+      "drug_class": "Cannabinoid (CB1/CB2 Agonist)",
+      "synonyms": [
+        "thc (\u03b49-tetrahydrocannabinol)",
+        "dronabinol",
+        "nabilone",
+        "nabiximols (sativex)",
+        "cannabis",
+        "marijuana",
+        "weed",
+        "delta-9-thc",
+        "pot",
+        "dope",
+        "ganja",
+        "reefer"
+      ]
+    },
+    "brivaracetam": {
+      "canonical_name": "Brivaracetam",
+      "drug_class": "Anticonvulsant (SV2A Ligand)",
+      "synonyms": [
+        "brivaracetam",
+        "briviact"
+      ]
+    },
+    "sumatriptan": {
+      "canonical_name": "Sumatriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "sumatriptan",
+        "imitrex",
+        "imigran"
+      ]
+    },
+    "rizatriptan": {
+      "canonical_name": "Rizatriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "rizatriptan",
+        "maxalt"
+      ]
+    },
+    "zolmitriptan": {
+      "canonical_name": "Zolmitriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "zolmitriptan",
+        "zomig"
+      ]
+    },
+    "naratriptan": {
+      "canonical_name": "Naratriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "naratriptan",
+        "amerge",
+        "naramig"
+      ]
+    },
+    "eletriptan": {
+      "canonical_name": "Eletriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "eletriptan",
+        "relpax"
+      ]
+    },
+    "frovatriptan": {
+      "canonical_name": "Frovatriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "frovatriptan",
+        "frova"
+      ]
+    },
+    "almotriptan": {
+      "canonical_name": "Almotriptan",
+      "drug_class": "Triptan (5-HT1B/1D Agonist)",
+      "synonyms": [
+        "almotriptan",
+        "axert"
+      ]
+    },
+    "lasmiditan": {
+      "canonical_name": "Lasmiditan",
+      "drug_class": "Ditan (5-HT1F Agonist)",
+      "synonyms": [
+        "lasmiditan",
+        "reyvow"
+      ]
+    },
+    "ubrogepant": {
+      "canonical_name": "Ubrogepant",
+      "drug_class": "CGRP Receptor Antagonist (Gepant)",
+      "synonyms": [
+        "ubrogepant",
+        "ubrelvy"
+      ]
+    },
+    "rimegepant": {
+      "canonical_name": "Rimegepant",
+      "drug_class": "CGRP Receptor Antagonist (Gepant)",
+      "synonyms": [
+        "rimegepant",
+        "nurtec odt",
+        "vydura"
+      ]
+    },
+    "atogepant": {
+      "canonical_name": "Atogepant",
+      "drug_class": "CGRP Receptor Antagonist (Gepant, Preventive)",
+      "synonyms": [
+        "atogepant",
+        "qulipta"
+      ]
+    },
+    "zavegepant": {
+      "canonical_name": "Zavegepant",
+      "drug_class": "CGRP Receptor Antagonist (Gepant, Intranasal)",
+      "synonyms": [
+        "zavegepant",
+        "zavzpret"
+      ]
+    },
+    "dihydroergotamine": {
+      "canonical_name": "Dihydroergotamine (DHE)",
+      "drug_class": "Ergot Derivative",
+      "synonyms": [
+        "dihydroergotamine (dhe)",
+        "migranal",
+        "d.h.e. 45"
+      ]
+    },
+    "dmt": {
+      "canonical_name": "DMT",
+      "drug_class": "Tryptamine Psychedelic",
+      "synonyms": [
+        "dmt",
+        "n,n-dimethyltryptamine",
+        "dimethyltryptamine",
+        "n,n-dmt",
+        "spirit molecule"
+      ]
+    },
+    "fivemeodmt": {
+      "canonical_name": "5-MeO-DMT",
+      "drug_class": "Tryptamine Psychedelic",
+      "synonyms": [
+        "5-meo-dmt",
+        "5-methoxy-dmt"
+      ]
+    },
+    "lsd": {
+      "canonical_name": "LSD",
+      "drug_class": "Lysergamide Psychedelic",
+      "synonyms": [
+        "lsd",
+        "lysergic acid diethylamide",
+        "acid",
+        "tabs",
+        "blotter",
+        "lucy"
+      ]
+    },
+    "doi": {
+      "canonical_name": "DOI",
+      "drug_class": "Phenethylamine Psychedelic (DOx)",
+      "synonyms": [
+        "doi",
+        "2,5-dimethoxy-4-iodoamphetamine"
+      ]
+    },
+    "mescaline": {
+      "canonical_name": "Mescaline",
+      "drug_class": "Phenethylamine Psychedelic",
+      "synonyms": [
+        "mescaline",
+        "peyote",
+        "san pedro alkaloid",
+        "san pedro",
+        "mesc"
+      ]
+    },
+    "twocb": {
+      "canonical_name": "2C-B",
+      "drug_class": "Phenethylamine Psychedelic (2C-x)",
+      "synonyms": [
+        "2c-b",
+        "4-bromo-2,5-dimethoxyphenethylamine"
+      ]
+    },
+    "mdma": {
+      "canonical_name": "MDMA",
+      "drug_class": "Entactogen / Serotonin Releaser",
+      "synonyms": [
+        "mdma",
+        "3,4-methylenedioxymethamphetamine",
+        "ecstasy",
+        "molly",
+        "emma",
+        "e",
+        "mandy",
+        "x"
+      ]
+    },
+    "methylone": {
+      "canonical_name": "Methylone",
+      "drug_class": "Cathinone Entactogen",
+      "synonyms": [
+        "methylone",
+        "\u03b2-keto-mdma",
+        "bk-mdma"
+      ]
+    },
+    "diphenhydramine": {
+      "canonical_name": "Diphenhydramine",
+      "drug_class": "1st-Gen Antihistamine (Sedating)",
+      "synonyms": [
+        "diphenhydramine",
+        "benadryl",
+        "nytol"
+      ]
+    },
+    "chlorpheniramine": {
+      "canonical_name": "Chlorpheniramine",
+      "drug_class": "1st-Gen Antihistamine (Sedating)",
+      "synonyms": [
+        "chlorpheniramine",
+        "chlor-trimeton",
+        "piriton"
+      ]
+    },
+    "brompheniramine": {
+      "canonical_name": "Brompheniramine",
+      "drug_class": "1st-Gen Antihistamine (Sedating)",
+      "synonyms": [
+        "brompheniramine",
+        "dimetapp",
+        "bromfed"
+      ]
+    },
+    "clemastine": {
+      "canonical_name": "Clemastine",
+      "drug_class": "1st-Gen Antihistamine (Sedating)",
+      "synonyms": [
+        "clemastine",
+        "tavist",
+        "tavegil"
+      ]
+    },
+    "doxylamine": {
+      "canonical_name": "Doxylamine",
+      "drug_class": "1st-Gen Antihistamine (Sedating)",
+      "synonyms": [
+        "doxylamine",
+        "unisom",
+        "diclegis"
+      ]
+    },
+    "promethazine": {
+      "canonical_name": "Promethazine",
+      "drug_class": "1st-Gen Antihistamine / Phenothiazine",
+      "synonyms": [
+        "promethazine",
+        "phenergan",
+        "prometh"
+      ]
+    },
+    "cyclizine": {
+      "canonical_name": "Cyclizine",
+      "drug_class": "1st-Gen Antihistamine (Piperazine)",
+      "synonyms": [
+        "cyclizine",
+        "valoid",
+        "marezine"
+      ]
+    },
+    "meclizine": {
+      "canonical_name": "Meclizine",
+      "drug_class": "1st-Gen Antihistamine (Piperazine)",
+      "synonyms": [
+        "meclizine",
+        "antivert",
+        "bonine"
+      ]
+    },
+    "cyproheptadine": {
+      "canonical_name": "Cyproheptadine",
+      "drug_class": "1st-Gen Antihistamine / 5-HT Antagonist",
+      "synonyms": [
+        "cyproheptadine",
+        "periactin"
+      ]
+    },
+    "ketotifen": {
+      "canonical_name": "Ketotifen",
+      "drug_class": "1st-Gen Antihistamine / Mast Cell Stabiliser",
+      "synonyms": [
+        "ketotifen",
+        "zaditen",
+        "zaditor"
+      ]
+    },
+    "cetirizine": {
+      "canonical_name": "Cetirizine",
+      "drug_class": "2nd-Gen Antihistamine (Low-Sedating)",
+      "synonyms": [
+        "cetirizine",
+        "zyrtec",
+        "reactine"
+      ]
+    },
+    "loratadine": {
+      "canonical_name": "Loratadine",
+      "drug_class": "2nd-Gen Antihistamine (Non-Sedating)",
+      "synonyms": [
+        "loratadine",
+        "claritin",
+        "clarityn"
+      ]
+    },
+    "fexofenadine": {
+      "canonical_name": "Fexofenadine",
+      "drug_class": "2nd-Gen Antihistamine (Non-Sedating)",
+      "synonyms": [
+        "fexofenadine",
+        "allegra",
+        "telfast"
+      ]
+    },
+    "azelastine": {
+      "canonical_name": "Azelastine",
+      "drug_class": "2nd-Gen Antihistamine (Topical)",
+      "synonyms": [
+        "azelastine",
+        "astelin",
+        "rhinolast",
+        "optilast"
+      ]
+    },
+    "mizolastine": {
+      "canonical_name": "Mizolastine",
+      "drug_class": "2nd-Gen Antihistamine (Non-Sedating)",
+      "synonyms": [
+        "mizolastine",
+        "mizollen",
+        "zolistan"
+      ]
+    },
+    "acrivastine": {
+      "canonical_name": "Acrivastine",
+      "drug_class": "2nd-Gen Antihistamine (Short-Acting)",
+      "synonyms": [
+        "acrivastine",
+        "semprex-d (us)",
+        "benadryl allergy (uk)"
+      ]
+    },
+    "levocetirizine": {
+      "canonical_name": "Levocetirizine",
+      "drug_class": "3rd-Gen Antihistamine (R-enantiomer of Cetirizine)",
+      "synonyms": [
+        "levocetirizine",
+        "xyzal",
+        "xusal"
+      ]
+    },
+    "desloratadine": {
+      "canonical_name": "Desloratadine",
+      "drug_class": "3rd-Gen Antihistamine (Active Metabolite of Loratadine)",
+      "synonyms": [
+        "desloratadine",
+        "aerius",
+        "clarinex"
+      ]
+    },
+    "bilastine": {
+      "canonical_name": "Bilastine",
+      "drug_class": "3rd-Gen Antihistamine (Non-Sedating)",
+      "synonyms": [
+        "bilastine",
+        "bilaxten",
+        "ilaxten"
+      ]
+    },
+    "rupatadine": {
+      "canonical_name": "Rupatadine",
+      "drug_class": "3rd-Gen Antihistamine / PAF Antagonist",
+      "synonyms": [
+        "rupatadine",
+        "rupafin",
+        "rinialer"
+      ]
+    },
+    "metoclopramide": {
+      "canonical_name": "Metoclopramide",
+      "drug_class": "Anti-emetic / Prokinetic (D2 Antagonist + 5-HT4 Agonist)",
+      "synonyms": [
+        "metoclopramide",
+        "reglan",
+        "maxolon"
+      ]
+    },
+    "domperidone": {
+      "canonical_name": "Domperidone",
+      "drug_class": "Anti-emetic / Prokinetic (D2 Antagonist, Peripherally Restricted)",
+      "synonyms": [
+        "domperidone",
+        "motilium"
+      ]
+    },
+    "ondansetron": {
+      "canonical_name": "Ondansetron",
+      "drug_class": "Anti-emetic (5-HT3 Antagonist)",
+      "synonyms": [
+        "ondansetron",
+        "zofran"
+      ]
+    },
+    "granisetron": {
+      "canonical_name": "Granisetron",
+      "drug_class": "Anti-emetic (5-HT3 Antagonist)",
+      "synonyms": [
+        "granisetron",
+        "kytril",
+        "sancuso"
+      ]
+    },
+    "aprepitant": {
+      "canonical_name": "Aprepitant",
+      "drug_class": "Anti-emetic (NK1 Antagonist)",
+      "synonyms": [
+        "aprepitant",
+        "emend"
+      ]
+    },
+    "scopolamine": {
+      "canonical_name": "Scopolamine",
+      "drug_class": "Anti-emetic / Antimuscarinic (Motion Sickness)",
+      "synonyms": [
+        "scopolamine",
+        "transderm sc\u014dp",
+        "kwells"
+      ]
+    }
+  }
+}
