@@ -5009,21 +5009,17 @@ function onSearch() {
     k.toLowerCase().includes(q) || v.desc.toLowerCase().includes(q)
   );
 
-  const expIndex = {};
-  Object.entries(DRUG_EXPERIENCE).forEach(([drugId, doses]) => {
-    ['low','medium','high'].forEach(doseKey => {
-      (doses[doseKey]||[]).forEach(([domain, effectText, valence]) => {
-        const key = effectText.toLowerCase();
-        if (!expIndex[key]) expIndex[key] = { effectText, domain, valence, drugIds: new Set() };
-        expIndex[key].drugIds.add(drugId);
-      });
-    });
-  });
-  const expMatches = Object.values(expIndex).filter(e => e.effectText.toLowerCase().includes(q))
-    .sort((a,b) => b.drugIds.size - a.drugIds.size);
-
   const domainMatches = (EXPERIENCE_DOMAINS||[]).filter(d => d.label.toLowerCase().includes(q));
   const valenceColor = { benefit:'#3ecf8e', side_effect:'#e05c5c', variable:'#f5c542' };
+
+  // Canonical effect group matches — match on label or search keywords
+  const canonIdx = _getCanonicalIdx();
+  const canonMatches = CANONICAL_EFFECTS.filter(g => {
+    const ql = q.toLowerCase();
+    return g.label.toLowerCase().includes(ql) || g.keys.some(k => k.includes(ql) || ql.includes(k));
+  }).map(g => ({ ...g, drugIds: canonIdx[g.id].drugIds }))
+    .filter(g => g.drugIds.size > 0)
+    .sort((a,b) => b.drugIds.size - a.drugIds.size);
 
   if (domainMatches.length) {
     html += sectionHeader('Effect domains', domainMatches.length);
@@ -5035,15 +5031,15 @@ function onSearch() {
     ).join('');
   }
 
-  if (expMatches.length) {
-    html += sectionHeader('Experiential effects', expMatches.length);
-    html += expMatches.slice(0,6).map(e => {
-      const domain = (EXPERIENCE_DOMAINS||[]).find(d => d.id === e.domain);
-      const vc = valenceColor[e.valence] || '#888';
-      const n = e.drugIds.size;
-      return `<div class="result-item" onclick="filterByExperience('${e.effectText.replace(/'/g,"\\'")}')">
-        <div class="name">${e.effectText} ${addAllChip(n, `filterByExperienceAll('${e.effectText.replace(/'/g,"\\'")}')`)} </div>
-        <div class="sub"><span style="color:${vc}">${e.valence.replace('_',' ')}</span> · ${domain?.icon||''} ${domain?.label||e.domain} · ${n} drug${n>1?'s':''}</div>
+  if (canonMatches.length) {
+    html += sectionHeader('Experiential effects', canonMatches.length);
+    html += canonMatches.slice(0,8).map(g => {
+      const vc = valenceColor[g.valence] || '#888';
+      const n = g.drugIds.size;
+      const valLabel = g.valence === 'side_effect' ? 'side effect' : g.valence;
+      return `<div class="result-item" onclick="filterByCanonicalEffect('${g.id}')">
+        <div class="name">${g.label} ${addAllChip(n, `filterByCanonicalEffect('${g.id}')`)}</div>
+        <div class="sub"><span style="color:${vc}">${valLabel}</span> · ${n} drug${n>1?'s':''}</div>
       </div>`;
     }).join('');
   }
@@ -5241,6 +5237,49 @@ function filterByExperience(effectText) {
   if (!focusDrug && selectedDrugs.length) focusDrug = selectedDrugs[0];
 
   // Clear search input WITHOUT triggering oninput (to avoid re-running onSearch)
+  const inp = document.getElementById('searchInput');
+  inp.removeEventListener && inp.removeEventListener('input', onSearch);
+  inp.value = '';
+  document.getElementById('searchResults').innerHTML = '';
+
+  render();
+  setView('experience');
+}
+
+// Filter drugs by canonical effect group (e.g. 'anxiety_reduced')
+function filterByCanonicalEffect(groupId) {
+  const group = CANONICAL_EFFECTS.find(g => g.id === groupId);
+  if (!group) return;
+
+  // Collect matching drugs — all raw effect texts that match this group's patterns
+  const drugMatches = [];
+  Object.entries(DRUG_EXPERIENCE).forEach(([drugId, doses]) => {
+    ['low','medium','high'].forEach((doseKey, di) => {
+      (doses[doseKey]||[]).forEach(([,text,,]) => {
+        const el = text.toLowerCase();
+        if (group.inc.some(p => el.includes(p)) && !group.exc.some(p => el.includes(p))) {
+          if (!drugMatches.find(m => m.drugId === drugId)) {
+            drugMatches.push({ drugId, dose: di + 1 });
+          }
+        }
+      });
+    });
+  });
+
+  if (!drugMatches.length) {
+    document.getElementById('searchResults').innerHTML =
+      `<div style="font-size:11px;color:var(--text3);padding:8px">No drugs found for "${group.label}"</div>`;
+    return;
+  }
+
+  drugMatches.forEach(m => {
+    if (!selectedDrugs.includes(m.drugId)) {
+      selectedDrugs.push(m.drugId);
+      drugDoseLevels[m.drugId] = m.dose;
+    }
+  });
+  if (!focusDrug && selectedDrugs.length) focusDrug = selectedDrugs[0];
+
   const inp = document.getElementById('searchInput');
   inp.removeEventListener && inp.removeEventListener('input', onSearch);
   inp.value = '';
@@ -7649,6 +7688,223 @@ const EXPERIENCE_DOMAINS = [
 // Each effect entry: [domain_id, effect_text, valence, onset]
 // valence: 'benefit' | 'side_effect' | 'variable'
 // onset: 'acute' (minutes-hours) | 'days' (1-7 days) | 'weeks' (2-6 weeks)
+
+// ── CANONICAL EFFECT GROUPS ──────────────────────────────────────────────────
+// Maps search keywords → canonical display label + substring patterns that
+// match raw effect text entries in DRUG_EXPERIENCE.
+// Used by onSearch() to show grouped effects rather than individual variants.
+const CANONICAL_EFFECTS = [
+  // id, label, valence, searchKeywords (match user query), includePatterns (match raw effect text), excludePatterns
+  { id:'mood_improved',      label:'Mood improved',                    valence:'benefit',
+    keys:['mood','antidepressant','depress'],
+    inc:['antidepressant','low mood lift','mood lift','mood improv','mood stabil','mood normaliz','mood elevat','mood enhanc','mood boost','mood brighten','mood positiv','anhedonia reduc','leaden paralysis lift','mood raised','mood stabilised','full antidepressant'],
+    exc:['suicid','mood worsen','worsening mood','psychosis','mood instabil','mood cycling'] },
+
+  { id:'mood_worsened',      label:'Mood worsened / depressogenic',    valence:'side_effect',
+    keys:['mood','depress','suicid','dysphori'],
+    inc:['mood worsen','depress mood','low mood','mood lower','mood dip','dysphori','suicidal','mood instabil','worsening mood'],
+    exc:['low mood lift','mood lift','antidepressant'] },
+
+  { id:'emotional_blunting', label:'Emotional blunting',               valence:'side_effect',
+    keys:['blunt','numb','flat affect','emotional'],
+    inc:['emotional blunt','emotional numb','emotional flat','emotional dull','blunted affect','flat affect','blunting','numbing emotion','cognitive blunting'],
+    exc:['reduces blunting','less blunting'] },
+
+  { id:'euphoria',           label:'Euphoria',                         valence:'variable',
+    keys:['euphori','elation','high'],
+    inc:['euphori','elation','bliss','ecstasy','feeling high','intense rush','intense pleasure','anxiolysis and euphoria','euphoria and sedation'],
+    exc:['antidepressant','mood lift'] },
+
+  { id:'anxiety_reduced',    label:'Anxiety reduced',                  valence:'benefit',
+    keys:['anxiety','anxiet','anxiol','panic','worry','phobia','ocd','ptsd'],
+    inc:['anxiol','anxiety reduc','anxiety controll','anxiety disorder','anti-anxiety','anxiety rapidly','panic reduc','panic controll','anxiety relief','generalised anxiety','social anxiety reduc','worry reduc','hyperarousal reduc','tension reduc','fear reduc','phobia','ocd','ptsd','antipsychotic and anxiolytic'],
+    exc:['anxiogen','anxiety worsen','anxiety increas','may cause anxiety','anxiety / agit','challenging','anxiety, palpit','anxiety common','anxiety possible','anxiety during','initial anxiety','rebound anxiety','anxiety / panic / paranoia','anxiety / panic reduced'] },
+
+  { id:'anxiety_increased',  label:'Anxiety increased / anxiogenic',   valence:'side_effect',
+    keys:['anxiogen','anxiety'],
+    inc:['anxiogen','anxiety worsen','anxiety increas','may cause anxiety','anxiety, palpit','jitteriness','initial anxiety','rebound anxiety','anxiety common','anxiety possible','anxiety / agit','anxiety / panic / paranoia','anxiety / challenging','anxiety / overwhelming','anxiety during experience','5-ht2c agonism — may cause anxiety','anxiety / panic / paranoia'],
+    exc:[] },
+
+  { id:'sedation',           label:'Sedation / drowsiness',            valence:'variable',
+    keys:['sedat','drowsi','somnolen'],
+    inc:['sedati','drowsi','somnolen','heavy sedation','marked sedation','excessive sedation','daytime sedation','mild drowsiness','loss of consciousness','calming, sedation','dizziness, sedation'],
+    exc:['less sedating','low sedat','activating','insomni','anti-sedat'] },
+
+  { id:'sleep_improved',     label:'Sleep improved',                   valence:'benefit',
+    keys:['sleep','insomni','hypnot'],
+    inc:['sleep onset','sleep mainten','sleep quality','sleep improv','sleep facilit','sleep restor','sleep normaliz','improved sleep','sleep architectur','sleep promotion','sleep effect','hypnotic','nightmare suppression','full orexin','restful sleep'],
+    exc:['insomni','disrupted sleep','sleep worsen','complex sleep','amnesia','rebound insomni','worsen insomni','activating / insomni'] },
+
+  { id:'insomnia',           label:'Insomnia / sleep disruption',      valence:'side_effect',
+    keys:['insomni','sleep disturb'],
+    inc:['insomni','disrupted sleep','sleep disturb','worsen insomni','can worsen insomni','activation / insomni','activating / insomni','activating profile — can worsen insomni'],
+    exc:['insomni treat','insomni improv','treats insomni','insomnia relief','for insomni'] },
+
+  { id:'dreams_nightmares',  label:'Vivid dreams / nightmares',        valence:'variable',
+    keys:['dream','nightmar','rem'],
+    inc:['vivid dream','nightmar','dream intens','unusual dream','rem rebound','complex sleep behav','amnesia','anterograde amnesia'],
+    exc:['nightmare suppression'] },
+
+  { id:'cognition_improved', label:'Cognition / focus improved',       valence:'benefit',
+    keys:['focus','concentrat','cogniti','memory','adhd','clarity','brain fog'],
+    inc:['concentrat improv','concentrat markedly','focus improv','cognitive enhanc','cognitive clarity','cognitive improv','brain fog lift','attention improv','working memory improv','cognitive enhancement','improved attention','improved concentration','mental clarity','early cognitive improv','adhd symptom control — focus'],
+    exc:['impair','slowing','worsen','difficult','cognitive side','cognitive blunting','cognitive slow'] },
+
+  { id:'cognition_impaired', label:'Cognitive impairment / brain fog', valence:'side_effect',
+    keys:['cogniti','brain fog','memory','confusion','delirium','word-finding'],
+    inc:['cognitive slow','cognitive impair','cognitive blunting','brain fog','memory impair','confusion','delirium','cognitive dulling','word-finding','impaired memory','impaired working memory','psychomotor slow','cognitive side effect'],
+    exc:['cognitive clarity','cognitive improv','cognitive enhancement','cognitive side effects minimal'] },
+
+  { id:'energy_increased',   label:'Energy / motivation increased',    valence:'benefit',
+    keys:['energy','activat','motivat','fatigue','lethargy','alert'],
+    inc:['activating — energy','activating — reduced fatigue','activating, alerting','energis','energiz','alertness / energy','energy and motivation','energy and wakefulness','energy improv','energy increas','motivation improv','fatigue / leaden paralysis lift','reduced fatigue','stimulant-like activation','wakefulness promot','activating at medium','activating — least sedating','activating — nr'],
+    exc:['rebound fatigue','restlessness / activation','cardiovascular stimul','activating / insomni','activating profile — can worsen'] },
+
+  { id:'fatigue',            label:'Fatigue / lethargy',               valence:'side_effect',
+    keys:['fatigue','letharg','tired'],
+    inc:['fatigue','letharg','sluggish','significant fatigue','bradycardia, fatigue','reduced exercise tolerance','somnolence'],
+    exc:['fatigue lifted','reduced fatigue','activating — reduced fatigue','fatigue / leaden paralysis lift','anti-fatigue','rebound fatigue','paraesthesias, fatigue'] },
+
+  { id:'weight_gain',        label:'Weight gain / increased appetite', valence:'side_effect',
+    keys:['weight gain','appetite increas','appetite stimul'],
+    inc:['weight gain','appetite increas','appetite markedly','appetite significantly','significant weight gain','appetite stimulation','mild appetite stimulation','metabolic changes'],
+    exc:['weight loss','appetite suppress','appetite reduc','weight neutral','minimal weight gain','low weight gain'] },
+
+  { id:'weight_loss',        label:'Weight loss / appetite suppressed',valence:'variable',
+    keys:['weight loss','appetite suppress','appetite reduc','anorexi'],
+    inc:['appetite suppress','appetite reduc','weight loss','anorexi','appetite loss','appetite mildly reduc','nausea, weight loss','appetite suppression significant','significant appetite suppression'],
+    exc:['appetite stimul','weight gain','appetite increas'] },
+
+  { id:'sexual_dysfunction', label:'Sexual dysfunction',               valence:'side_effect',
+    keys:['sexual','libido','ejaculat','orgasm','prolactin'],
+    inc:['sexual dysfunct','libido reduc','libido decreas','low libido','anorgasmia','delayed orgasm','delayed ejaculat','erectile dysfunct','prolactin elevation — sexual','prolactin — sexual'],
+    exc:['no sexual dysfunct','sexual dysfunct low','low sexual dysfunct','minimal sexual dysfunct','less than ssri','premature ejaculation treatment','impulse control','hypersexual'] },
+
+  { id:'nausea_gi',          label:'Nausea / GI side effects',         valence:'side_effect',
+    keys:['nausea','vomit','gi ','diarrh','constipat'],
+    inc:['nausea','vomit','gi distress','gi effect','gi side','gi upset','gi intolerance','gi tolerab','diarrhoea','diarrhea','constipation, nausea','headache, nausea','gi side effects'],
+    exc:['antiemetic','anti-nausea','nausea relief','nausea controll','nausea / vertigo treat','motion sickness / nausea relief','nausea reduced','nausea treatment','chemotherapy-induced nausea control'] },
+
+  { id:'antiemetic',         label:'Antiemetic / nausea relief',       valence:'benefit',
+    keys:['antiemetic','anti-nausea','motion sickness'],
+    inc:['antiemetic','anti-nausea','nausea relief','nausea controll','motion sickness / nausea','motion sickness relief','nausea / vertigo treat','chemotherapy-induced nausea','migraine nausea'],
+    exc:[] },
+
+  { id:'dry_mouth',          label:'Dry mouth / anticholinergic',      valence:'side_effect',
+    keys:['dry mouth','anticholinerg','urinary'],
+    inc:['dry mouth','anticholinergic','urinary hes','blurred vision','anticholinergic burden','anticholinergic effect'],
+    exc:['antiemetic'] },
+
+  { id:'cardiovascular',     label:'Cardiovascular / BP effects',      valence:'side_effect',
+    keys:['blood pressure','tachycard','palpitat','hypertens','orthostatic','qtc','cardiac'],
+    inc:['tachycard','palpitat','hypertens','orthostatic','blood pressure','qtc','cardiac','cardiovascular','heart rate increas','arrhythm'],
+    exc:['bradycardia','heart rate lower','heart rate reduc','reduces heart rate','heart rate controll','rate controll'] },
+
+  { id:'sweating',           label:'Sweating',                         valence:'side_effect',
+    keys:['sweat','diaphor','night sweat'],
+    inc:['sweat','diaphoresis','night sweat'],
+    exc:[] },
+
+  { id:'akathisia',          label:'Akathisia / inner restlessness',   valence:'side_effect',
+    keys:['akathisi','inner restless'],
+    inc:['akathisi','inner restless','motor restless'],
+    exc:['akathisia treatment','eps relief','eps and drug-induced parkinsonism treatment'] },
+
+  { id:'eps_tremor',         label:'EPS / tremor / parkinsonism',      valence:'side_effect',
+    keys:['eps','tremor','extrapyramid','parkinson','dystoni','rigidity'],
+    inc:['tremor','extrapyramidal',' eps ','eps ','eps,','eps—','eps:','rigidity','parkinson','dystoni','bradykinesia','motor slow','d2 blockade — eps','stiffness','drug-induced parkinsonism'],
+    exc:['low eps','minimal eps','eps risk low','less eps','reduced eps','eps relief','eps and drug-induced parkinsonism treatment','anticonvulsant','absence epilepsy','focal epilepsy','akathisi'] },
+
+  { id:'tardive_dyskinesia', label:'Tardive dyskinesia risk',          valence:'side_effect',
+    keys:['tardive','dyskinesia'],
+    inc:['tardive','td risk'],
+    exc:[] },
+
+  { id:'antipsychotic',      label:'Antipsychotic effect',             valence:'benefit',
+    keys:['antipsychot','psychosis','hallucin','delusion','paranoia'],
+    inc:['antipsychotic','psychosis controll','hallucination reduc','delusion reduc','positive symptom','thought disorder improv','paranoia reduc','racing thoughts slowed','psychosis managed'],
+    exc:['psychosis risk','psychotomimetic','hallucination increas','psychosis worsen'] },
+
+  { id:'perceptual',         label:'Perceptual / visual effects',      valence:'variable',
+    keys:['visual','percept','hallucin','synasthes'],
+    inc:['visual','percept','colour','color','pattern','synasthes','synaesthes','geometric','fractal','tracers','visual hallucin','sensory distort'],
+    exc:['hallucination reduc','antipsychotic'] },
+
+  { id:'dissociation',       label:'Dissociation / ego dissolution',   valence:'variable',
+    keys:['dissociat','derealis','depersonal','ego','k-hole'],
+    inc:['dissociat','derealis','depersonal','ego dissol','ego death','out of body','detach','unreal','k-hole','dissociative'],
+    exc:[] },
+
+  { id:'mystical',           label:'Mystical / transcendent experience',valence:'variable',
+    keys:['mystical','transcend','spiritual','oceanic','oneness'],
+    inc:['mystical','transcend','spiritual','unity','oceanic','awe','profound sense','cosmic','oneness'],
+    exc:[] },
+
+  { id:'empathy_social',     label:'Empathy / social connection',      valence:'benefit',
+    keys:['empathy','prosocial','social connect'],
+    inc:['empathy','prosocial','social connect','closeness','warmth','openness','sociab','social facilit'],
+    exc:['social anxiety'] },
+
+  { id:'dependence',         label:'Dependence / withdrawal risk',     valence:'side_effect',
+    keys:['dependence','withdrawal','discontinuat','addictive','abuse'],
+    inc:['dependence','withdrawal','discontinuat','addictive','abuse potential','habit-form','misuse potential'],
+    exc:['low dependence','minimal dependence','non-addict','non-habit','non-dependence'] },
+
+  { id:'anticonvulsant',     label:'Anticonvulsant / antiepileptic',   valence:'benefit',
+    keys:['anticonvulsant','antiepileptic','epilepsy','seizure controll'],
+    inc:['anticonvulsant','antiepileptic','seizure controll','epilepsy treatment','anxiolysis and anticonvulsant','focal epilepsy','absence epilepsy'],
+    exc:['seizure risk','lowers seizure threshold'] },
+
+  { id:'seizure_risk',       label:'Seizure risk',                     valence:'side_effect',
+    keys:['seizure risk','seizure threshold','convulsion'],
+    inc:['seizure risk','lowers seizure threshold','lower seizure threshold','convulsion'],
+    exc:['anticonvulsant','seizure controll','antiepileptic','epilepsy treatment'] },
+
+  { id:'analgesia',          label:'Analgesic / pain relief',          valence:'benefit',
+    keys:['pain','analges','neuropathic'],
+    inc:['analges','pain relief','pain reduc','pain controll','neuropathic pain','analgesia','pain manag'],
+    exc:[] },
+
+  { id:'antimigraine',       label:'Antimigraine effect',              valence:'benefit',
+    keys:['migraine','headache relief'],
+    inc:['migraine','headache relief','headache controll','antimigraine','cephalgia','migraine prophyl','migraine treat'],
+    exc:['headache, nausea','headache, insomni','headache as side','headache side'] },
+
+  { id:'antimanic',          label:'Antimanic / mood stabiliser',      valence:'benefit',
+    keys:['manic','mania','mood stabiliser'],
+    inc:['antimanic','mood stabiliser','mania controll','manic episode','mood stabilised (no longer cycling)'],
+    exc:['mood worsen','instabil'] },
+
+  { id:'adhd',               label:'ADHD symptoms controlled',         valence:'benefit',
+    keys:['adhd','attention deficit','hyperactivity'],
+    inc:['adhd symptom','attention deficit','adhd management','adhd treatment','focus and impulsivity','hyperactivity controll'],
+    exc:[] },
+];
+
+// Pre-build: for each canonical group, collect matching drugIds from DRUG_EXPERIENCE
+// Returns array of {id, label, valence, drugIds} sorted by drugIds.size desc
+function _buildCanonicalIndex() {
+  const idx = {};
+  CANONICAL_EFFECTS.forEach(g => { idx[g.id] = { ...g, drugIds: new Set() }; });
+  Object.entries(DRUG_EXPERIENCE).forEach(([drugId, doses]) => {
+    ['low','medium','high'].forEach(dk => {
+      (doses[dk]||[]).forEach(([,effectText,,]) => {
+        const el = effectText.toLowerCase();
+        CANONICAL_EFFECTS.forEach(g => {
+          if (g.inc.some(p => el.includes(p)) && !g.exc.some(p => el.includes(p))) {
+            idx[g.id].drugIds.add(drugId);
+          }
+        });
+      });
+    });
+  });
+  return idx;
+}
+let _canonicalIdx = null;
+function _getCanonicalIdx() {
+  if (!_canonicalIdx) _canonicalIdx = _buildCanonicalIndex();
+  return _canonicalIdx;
+}
 
 // ============================================================
 //  RECEPTOR → EXPERIENCE MAPPING
