@@ -6725,7 +6725,7 @@ function renderRadarView(container) {
           <div style="display:flex;flex-wrap:wrap;gap:4px 0;">
             ${RECEPTOR_IDS.map(rid => {
               const recLabel = RECEPTORS.find(r => r.id === rid)?.label;
-              const contributors = entries.filter(d => (d.receptors[rid]?.[getDoseFor(d.id)-1]||0) >= 4)
+              const contributors = entries.filter(d => (d.receptors[rid]?.[getDoseFor(d.id)-1]||0) >= CLINICAL_THRESHOLD)
                 .sort((a,b) => (b.receptors[rid]?.[getDoseFor(b.id)-1]||0) - (a.receptors[rid]?.[getDoseFor(a.id)-1]||0));
               if (!contributors.length) return '';
               return `<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;width:100%">
@@ -6969,7 +6969,7 @@ function renderCompareView(container) {
         <div style="display:flex;flex-wrap:wrap;gap:4px 0;">
           ${RECEPTOR_IDS.map(rid => {
             const recLabel = RECEPTORS.find(r => r.id === rid)?.label;
-            const contributors = drugs.filter(d => (d.receptors[rid]?.[getDoseFor(d.id)-1]||0) >= 4)
+            const contributors = drugs.filter(d => (d.receptors[rid]?.[getDoseFor(d.id)-1]||0) >= CLINICAL_THRESHOLD)
               .sort((a,b) => (b.receptors[rid]?.[getDoseFor(b.id)-1]||0) - (a.receptors[rid]?.[getDoseFor(a.id)-1]||0));
             if (!contributors.length) return '';
             return `<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;width:100%">
@@ -7545,7 +7545,7 @@ function renderEffectsView(container) {
       <div class="agg-title">Receptor Mechanism Summary</div>
       ${RECEPTOR_IDS.map(rid => {
         const rec = RECEPTORS.find(r => r.id === rid);
-        const activeDrugs = drugs.filter(d => (d.receptors[rid]?.[getDoseFor(d.id)-1]||0) >= 4);
+        const activeDrugs = drugs.filter(d => (d.receptors[rid]?.[getDoseFor(d.id)-1]||0) >= CLINICAL_THRESHOLD);
         if (!activeDrugs.length) return '';
         return `
           <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border)">
